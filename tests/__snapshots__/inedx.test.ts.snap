@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deprecated 1`] = `
+Object {
+  "parser": "flow",
+}
+`;
+
+exports[`deprecated 2`] = `
+Array [
+  "useFlowParser is deprecated, now treats it as { parser: \\"flow\\" }.",
+]
+`;
+
+exports[`redirect 1`] = `
+Object {
+  "parser": "css",
+}
+`;
+
+exports[`redirect 2`] = `
+Array [
+  "{ parser: \\"postcss\\" } is deprecated, now treats it as { parser: \\"css\\" }.",
+]
+`;

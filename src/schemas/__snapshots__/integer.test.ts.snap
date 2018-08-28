@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema {"name":"<key>"} with input {"<key>":1.5} 1`] = `"Invalid \\"<key>\\" value. Expected an integer, but received 1.5."`;

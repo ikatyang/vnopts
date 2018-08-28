@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema {"name":"<key>"} with input {"<key>":"invalid"} 1`] = `"Invalid \\"<key>\\" value. Expected true or false, but received \\"invalid\\"."`;

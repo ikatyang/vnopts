@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`apiDescriptor 1`] = `"{}"`;
+
+exports[`apiDescriptor 2`] = `"\\"key\\""`;
+
+exports[`apiDescriptor 3`] = `"{ key: \\"value\\" }"`;

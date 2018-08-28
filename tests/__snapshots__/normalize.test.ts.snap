@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema {"name":"<key>","deprecated":{"value":"<value>"},"redirect":"<transfer-key>"} with input {"<key>":"<value>"} 1`] = `
+Array [
+  "{ \\"<key>\\": \\"<value>\\" } is deprecated, now treats it as { \\"<transfer-key>\\": \\"<value>\\" }.",
+]
+`;
+
+exports[`schema {"name":"<key>","deprecated":{"value":"<value>"},"redirect":{"key":"<transfer-key>","value":"<transfer-value>"}} with input {"<key>":"<value>"} 1`] = `
+Array [
+  "{ \\"<key>\\": \\"<value>\\" } is deprecated, now treats it as { \\"<transfer-key>\\": \\"<transfer-value>\\" }.",
+]
+`;
+
+exports[`schema {"name":"<key>","deprecated":{"value":"<value>"}} with input {"<key>":"<value>"} 1`] = `
+Array [
+  "{ \\"<key>\\": \\"<value>\\" } is deprecated.",
+]
+`;
+
+exports[`schema {"name":"<key>","deprecated":true,"redirect":"<transfer-key>"} with input {"<key>":"<value>"} 1`] = `
+Array [
+  "\\"<key>\\" is deprecated, now treats it as \\"<transfer-key>\\".",
+]
+`;
+
+exports[`schema {"name":"<key>","deprecated":true,"redirect":{"key":"<transfer-key>","value":"<transfer-value>"}} with input {"<key>":"<value>"} 1`] = `
+Array [
+  "\\"<key>\\" is deprecated, now treats it as { \\"<transfer-key>\\": \\"<transfer-value>\\" }.",
+]
+`;
+
+exports[`schema {"name":"<key>","deprecated":true} with input {"<key>":"<value>"} 1`] = `
+Array [
+  "\\"<key>\\" is deprecated.",
+]
+`;
+
+exports[`schema {"name":"<key>","validate":{"value":"<invalid-value>"}} with input {"<key>":"<value>"} 1`] = `"Invalid \\"<key>\\" value. Expected <expected>, but received \\"<invalid-value>\\"."`;
+
+exports[`schema {"name":"<key>","validate":false} with input {"<key>":"<value>"} 1`] = `"Invalid \\"<key>\\" value. Expected <expected>, but received \\"<value>\\"."`;
+
+exports[`schema {"name":"<key>"} with input {"<unknown-key>":"<unknown-value>"} 1`] = `
+Array [
+  "Ignored unknown option { \\"<unknown-key>\\": \\"<unknown-value>\\" }. Did you mean \\"<known-key>\\"?",
+]
+`;
+
+exports[`schema {"name":"<key>"} with input {"veryUnknown":"<very-unknown-value>"} 1`] = `
+Array [
+  "Ignored unknown option { veryUnknown: \\"<very-unknown-value>\\" }.",
+]
+`;

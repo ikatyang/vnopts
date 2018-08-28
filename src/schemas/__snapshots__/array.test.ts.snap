@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"<value>"} 1`] = `"Invalid \\"<key>\\" value. Expected an array of \\"<forward-value>\\", \\"<redirect-value>\\", \\"<transfer-value>\\" or \\"<value>\\", but received \\"<value>\\"."`;
+
+exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<deprecated-value>"]} 1`] = `
+Array [
+  "{ \\"<key>\\": [\\"<deprecated-value>\\"] } is deprecated.",
+]
+`;
+
+exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<invalid-value>"]} 1`] = `"Invalid \\"<key>\\" value. Expected an array of \\"<forward-value>\\", \\"<redirect-value>\\", \\"<transfer-value>\\" or \\"<value>\\", but received [\\"<invalid-value>\\"]."`;
