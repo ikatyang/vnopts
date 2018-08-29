@@ -16,7 +16,7 @@ export const commonDeprecatedHandler: DeprecatedHandler = (
 
   if (redirectTo) {
     messages.push(
-      `now treats it as ${chalk.blue(
+      `we now treat it as ${chalk.blue(
         typeof redirectTo === 'string'
           ? descriptor.key(redirectTo)
           : descriptor.pair(redirectTo),
