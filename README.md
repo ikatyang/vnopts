@@ -38,7 +38,7 @@ const schemas = [
 
 vnopts.normalize({ useFlowParser: true }, schemas);
 //=> { parser: "flow" }
-// warning: `useFlowParser` is deprecated, now treats it as `{ parser: "flow" }`.
+// warning: `useFlowParser` is deprecated, we now treat it as `{ parser: "flow" }`.
 
 vnopts.normalize({ parser: 'none' }, schemas);
 //=> error: Invalid `parser` value. Expected `"babylon", "flow" or "typescript"`, but received `"none"`.
