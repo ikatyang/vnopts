@@ -8,7 +8,7 @@ Object {
 
 exports[`deprecated 2`] = `
 Array [
-  "useFlowParser is deprecated, we now treat it as { parser: \\"flow\\" }.",
+  "useFlowParser is deprecated; we now treat it as { parser: \\"flow\\" }.",
 ]
 `;
 
@@ -20,6 +20,6 @@ Object {
 
 exports[`redirect 2`] = `
 Array [
-  "{ parser: \\"postcss\\" } is deprecated, we now treat it as { parser: \\"css\\" }.",
+  "{ parser: \\"postcss\\" } is deprecated; we now treat it as { parser: \\"css\\" }.",
 ]
 `;

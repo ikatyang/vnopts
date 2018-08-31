@@ -2,13 +2,13 @@
 
 exports[`schema {"name":"<key>","deprecated":{"value":"<value>"},"redirect":"<transfer-key>"} with input {"<key>":"<value>"} 1`] = `
 Array [
-  "{ \\"<key>\\": \\"<value>\\" } is deprecated, we now treat it as { \\"<transfer-key>\\": \\"<value>\\" }.",
+  "{ \\"<key>\\": \\"<value>\\" } is deprecated; we now treat it as { \\"<transfer-key>\\": \\"<value>\\" }.",
 ]
 `;
 
 exports[`schema {"name":"<key>","deprecated":{"value":"<value>"},"redirect":{"key":"<transfer-key>","value":"<transfer-value>"}} with input {"<key>":"<value>"} 1`] = `
 Array [
-  "{ \\"<key>\\": \\"<value>\\" } is deprecated, we now treat it as { \\"<transfer-key>\\": \\"<transfer-value>\\" }.",
+  "{ \\"<key>\\": \\"<value>\\" } is deprecated; we now treat it as { \\"<transfer-key>\\": \\"<transfer-value>\\" }.",
 ]
 `;
 
@@ -20,13 +20,13 @@ Array [
 
 exports[`schema {"name":"<key>","deprecated":true,"redirect":"<transfer-key>"} with input {"<key>":"<value>"} 1`] = `
 Array [
-  "\\"<key>\\" is deprecated, we now treat it as \\"<transfer-key>\\".",
+  "\\"<key>\\" is deprecated; we now treat it as \\"<transfer-key>\\".",
 ]
 `;
 
 exports[`schema {"name":"<key>","deprecated":true,"redirect":{"key":"<transfer-key>","value":"<transfer-value>"}} with input {"<key>":"<value>"} 1`] = `
 Array [
-  "\\"<key>\\" is deprecated, we now treat it as { \\"<transfer-key>\\": \\"<transfer-value>\\" }.",
+  "\\"<key>\\" is deprecated; we now treat it as { \\"<transfer-key>\\": \\"<transfer-value>\\" }.",
 ]
 `;
 
