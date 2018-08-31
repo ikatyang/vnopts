@@ -24,5 +24,5 @@ export const commonDeprecatedHandler: DeprecatedHandler = (
     );
   }
 
-  return messages.join(', ') + '.';
+  return messages.join('; ') + '.';
 };
