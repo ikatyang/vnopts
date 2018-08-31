@@ -14,5 +14,5 @@ module.exports = /** @type {jest.InitialOptions} */ ({
       statements: 100,
     },
   },
-  snapshotSerializers: ['<rootDir>/tests/__helpers__/serializer-ansi'],
+  snapshotSerializers: ['jest-snapshot-serializer-ansi'],
 });
