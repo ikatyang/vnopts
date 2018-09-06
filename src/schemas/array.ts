@@ -1,6 +1,7 @@
 import { Schema, SchemaHandlers } from '../schema';
 import {
   DeprecatedResult,
+  ExpectedResult,
   ForwardResult,
   NormalizedTransferResult,
   RedirectResult,
@@ -29,8 +30,19 @@ export class ArraySchema<$ValueSchema extends Schema<any>> extends Schema<
     this._valueSchema = valueSchema;
   }
 
-  public expected(utils: Utils) {
-    return `an array of ${this._valueSchema.expected(utils)}`;
+  public expected(utils: Utils): ExpectedResult {
+    const {
+      description,
+      valueTitle,
+      valueDescriptions,
+    } = utils.normalizeExpectedResult(this._valueSchema.expected(utils));
+
+    return valueTitle
+      ? {
+          valueTitle: `an array of the following values`,
+          valueDescriptions: [{ valueTitle, valueDescriptions }],
+        }
+      : { description: `an array of ${description}` };
   }
 
   public validate(value: unknown, utils: Utils): ValidateResult {

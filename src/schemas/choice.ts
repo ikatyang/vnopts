@@ -1,6 +1,7 @@
 import { Schema, SchemaHandlers, SchemaParameters } from '../schema';
 import {
   DeprecatedResult,
+  ExpectedResult,
   ForwardResult,
   RedirectResult,
   TransferTo,
@@ -38,17 +39,27 @@ export class ChoiceSchema extends Schema<ChoiceValue, ChoiceSchemaParameters> {
     );
   }
 
-  public expected({ descriptor }: Utils) {
-    const choiceValues = Array.from(this._choices.keys())
+  public expected({ descriptor }: Utils): ExpectedResult {
+    const choiceDescriptions = Array.from(this._choices.keys())
       .map(value => this._choices.get(value)!)
       .filter(choiceInfo => !choiceInfo.deprecated)
       .map(choiceInfo => choiceInfo.value)
       .sort(comparePrimitive)
       .map(descriptor.value);
 
-    const head = choiceValues.slice(0, -2);
-    const tail = choiceValues.slice(-2);
-    return head.concat(tail.join(' or ')).join(', ');
+    if (choiceDescriptions.length === 1) {
+      return choiceDescriptions[0];
+    }
+
+    const head = choiceDescriptions.slice(0, -2);
+    const tail = choiceDescriptions.slice(-2);
+    const message = head.concat(tail.join(' or ')).join(', ');
+
+    return {
+      description: message,
+      valueTitle: 'one of the following values',
+      valueDescriptions: choiceDescriptions,
+    };
   }
 
   public validate(value: unknown): ValidateResult {

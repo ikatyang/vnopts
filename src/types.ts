@@ -2,6 +2,7 @@ import { Schema } from './schema';
 import {
   normalizeDefaultResult,
   normalizeDeprecatedResult,
+  normalizeExpectedResult,
   normalizeForwardResult,
   normalizeRedirectResult,
   normalizeValidateResult,
@@ -10,9 +11,11 @@ import {
 
 export interface Utils {
   logger: Logger;
+  loggerPrintWidth: number;
   descriptor: Descriptor;
   schemas: Record<string, Schema<any>>;
   normalizeDefaultResult: typeof normalizeDefaultResult;
+  normalizeExpectedResult: typeof normalizeExpectedResult;
   normalizeDeprecatedResult: typeof normalizeDeprecatedResult;
   normalizeForwardResult: typeof normalizeForwardResult;
   normalizeRedirectResult: typeof normalizeRedirectResult;
@@ -102,7 +105,25 @@ export type NormalizedDeprecatedResultWithTrue<$Value> =
   | true
   | NormalizedDeprecatedResult<$Value>;
 
-export type ExpectedResult = string;
+export type ExpectedResult =
+  | string
+  | { description: string }
+  | {
+      description?: string;
+      valueTitle: string;
+      valueDescriptions: ExpectedResult[];
+    };
+export type NormalizedExpectedResult =
+  | {
+      description: string;
+      valueTitle?: never;
+      valueDescriptions: NormalizedExpectedResult[];
+    }
+  | {
+      description?: string;
+      valueTitle: string;
+      valueDescriptions: NormalizedExpectedResult[];
+    };
 
 export type DefaultResult<$Value> = undefined | { value?: $Value };
 export interface NormalizedDefaultResult<$Value> {

@@ -40,3 +40,20 @@ describe.each`
     { schemas: [new AnySchema({ name: transferKey })] },
   ),
 );
+
+for (const loggerPrintWidth of [-Infinity, Infinity]) {
+  describe.each`
+    parameters | input                    | output   | hasWarnings
+    ${{}}      | ${{ [name]: 'invalid' }} | ${Error} | ${false}
+  `(
+    `(expected values printWidth=${loggerPrintWidth})`,
+    eachHandler<ChoiceSchema>(
+      ChoiceSchema,
+      {
+        name,
+        choices: Array.from(new Array(5), (_value, index) => `value${index}`),
+      },
+      { loggerPrintWidth },
+    ),
+  );
+}

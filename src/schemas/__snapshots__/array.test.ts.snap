@@ -1,6 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"<value>"} 1`] = `"Invalid \\"<key>\\" value. Expected an array of \\"<forward-value>\\", \\"<redirect-value>\\", \\"<transfer-value>\\" or \\"<value>\\", but received \\"<value>\\"."`;
+exports[`(complex expected values) schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"invalid"} 1`] = `
+"Invalid \\"<key>\\" value. Expected an array of the following values, but received \\"invalid\\".
+- one of the following values:
+  - \\"value0\\"
+  - \\"value1\\"
+  - \\"value10\\"
+  - \\"value11\\"
+  - \\"value12\\"
+  - \\"value13\\"
+  - \\"value14\\"
+  - \\"value15\\"
+  - \\"value16\\"
+  - \\"value17\\"
+  - \\"value18\\"
+  - \\"value19\\"
+  - \\"value2\\"
+  - \\"value3\\"
+  - \\"value4\\"
+  - \\"value5\\"
+  - \\"value6\\"
+  - \\"value7\\"
+  - \\"value8\\"
+  - \\"value9\\""
+`;
+
+exports[`(simple expected values) schema {"valueSchema":{"name":"<key>"}} with input {"<key>":"invalid"} 1`] = `"Invalid \\"<key>\\" value. Expected an array of true or false, but received \\"invalid\\"."`;
+
+exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"<value>"} 1`] = `
+"Invalid \\"<key>\\" value. Expected an array of the following values, but received \\"<value>\\".
+- one of the following values:
+  - \\"<forward-value>\\"
+  - \\"<redirect-value>\\"
+  - \\"<transfer-value>\\"
+  - \\"<value>\\""
+`;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<deprecated-value>"]} 1`] = `
 Array [
@@ -8,4 +42,11 @@ Array [
 ]
 `;
 
-exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<invalid-value>"]} 1`] = `"Invalid \\"<key>\\" value. Expected an array of \\"<forward-value>\\", \\"<redirect-value>\\", \\"<transfer-value>\\" or \\"<value>\\", but received [\\"<invalid-value>\\"]."`;
+exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<invalid-value>"]} 1`] = `
+"Invalid \\"<key>\\" value. Expected an array of the following values, but received [\\"<invalid-value>\\"].
+- one of the following values:
+  - \\"<forward-value>\\"
+  - \\"<redirect-value>\\"
+  - \\"<transfer-value>\\"
+  - \\"<value>\\""
+`;

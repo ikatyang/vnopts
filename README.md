@@ -74,6 +74,7 @@ class Normalizer {
 ```ts
 interface NormalizerOptions {
   logger?: Logger | false;
+  loggerPrintWidth?: number;
   descriptor?: Descriptor;
   unknown?: UnknownHandler;
   invalid?: InvalidHandler;
@@ -360,10 +361,38 @@ type SchemaExpectedHandler =
   | ExpectedResult
   | (((schema: Schema, utils: Utils) => ExpectedResult));
 
-type ExpectedResult = string;
+type ExpectedResult =
+  | string
+  | { description: string }
+  | {
+      description?: string;
+      valueTitle: string;
+      valueDescriptions: ExpectedResult[];
+    };
 ```
 
-Returns the description for the expected value.
+Returns the description and/or the detailed description for the expected value.
+For example the following `ExpectedResult`:
+
+```json
+{
+  "valueTitle": "one of the following values",
+  "valueDescriptions": ["foo", "bar", "baz"]
+}
+```
+
+will produce the following message in `commonInvalidHandler`:
+
+```
+Invalid `<key>` value. Expected `one of the following values`, but received `<value>`.
+- `"foo"`
+- `"bar"`
+- `"baz"`
+```
+
+If both `description` and `valueTitle` are returned,
+`description` will be chosen if its length is less than `loggerPrintWidth`,
+otherwise `valueTitle`.
 
 #### validate
 

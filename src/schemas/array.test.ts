@@ -1,5 +1,6 @@
 import { eachHandler } from '../../tests/__helpers__/utils';
 import { ArraySchema } from './array';
+import { BooleanSchema } from './boolean';
 import { ChoiceSchema } from './choice';
 
 const name = '<key>';
@@ -31,6 +32,29 @@ describe.each`
         { value: forward, forward: { key: name, value: [transfer] } },
         { value: deprecated, deprecated: true },
       ],
+    }),
+  }),
+);
+
+describe.each`
+  parameters | input                    | output   | hasWarnings
+  ${{}}      | ${{ [name]: 'invalid' }} | ${Error} | ${false}
+`(
+  '(simple expected values)',
+  eachHandler<ArraySchema<BooleanSchema>>(ArraySchema, {
+    valueSchema: new BooleanSchema({ name }),
+  }),
+);
+
+describe.each`
+  parameters | input                    | output   | hasWarnings
+  ${{}}      | ${{ [name]: 'invalid' }} | ${Error} | ${false}
+`(
+  '(complex expected values)',
+  eachHandler<ArraySchema<ChoiceSchema>>(ArraySchema, {
+    valueSchema: new ChoiceSchema({
+      name,
+      choices: Array.from(new Array(20), (_value, index) => `value${index}`),
     }),
   }),
 );

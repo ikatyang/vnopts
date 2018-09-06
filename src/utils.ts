@@ -1,10 +1,12 @@
 import {
   DefaultResult,
   DeprecatedResult,
+  ExpectedResult,
   ForwardResult,
   NormalizedDefaultResult,
   NormalizedDeprecatedResult,
   NormalizedDeprecatedResultWithTrue,
+  NormalizedExpectedResult,
   NormalizedForwardResult,
   NormalizedRedirectResult,
   NormalizedTransferResult,
@@ -129,6 +131,26 @@ export function normalizeDefaultResult<$Value>(
   result: DefaultResult<$Value>,
 ): NormalizedDefaultResult<$Value> {
   return result === undefined ? {} : result;
+}
+
+export function normalizeExpectedResult(
+  result: ExpectedResult,
+): NormalizedExpectedResult {
+  if (typeof result === 'string') {
+    return { valueDescriptions: [], description: result };
+  }
+
+  if (!('valueTitle' in result)) {
+    return { valueDescriptions: [], description: result.description };
+  }
+
+  const { description, valueTitle, valueDescriptions } = result;
+
+  return {
+    description,
+    valueTitle,
+    valueDescriptions: valueDescriptions.map(normalizeExpectedResult),
+  };
 }
 
 export function normalizeValidateResult(
