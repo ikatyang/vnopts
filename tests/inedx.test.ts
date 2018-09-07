@@ -1,4 +1,5 @@
 import * as vnopts from '../src';
+import { IdentifyMissing } from '../src';
 import { createLogger } from './__helpers__/utils';
 
 const logger = createLogger();
@@ -46,4 +47,35 @@ test('redirect', () => {
     vnopts.normalize({ parser: 'postcss' }, schemas, { logger }),
   ).toMatchSnapshot();
   expect(logger.getMessages()).toMatchSnapshot();
+});
+
+describe('missing', () => {
+  const name = 'a';
+  const missing: IdentifyMissing = (key, options) => options[key] === undefined;
+
+  test('missing pair will be filtered', () => {
+    expect(
+      vnopts.normalize(
+        { [name]: undefined },
+        [vnopts.createSchema(vnopts.AnySchema, { name, validate: false })],
+        { missing },
+      ),
+    ).toEqual({});
+  });
+
+  test('missing pair will be replaced by default pair if present', () => {
+    const defaultValue = 'foo';
+    expect(
+      vnopts.normalize(
+        { [name]: undefined },
+        [
+          vnopts.createSchema(vnopts.AnySchema, {
+            name,
+            default: { value: defaultValue },
+          }),
+        ],
+        { missing },
+      ),
+    ).toEqual({ a: defaultValue });
+  });
 });

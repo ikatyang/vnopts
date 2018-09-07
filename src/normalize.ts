@@ -8,6 +8,7 @@ import { Schema } from './schema';
 import {
   DeprecatedHandler,
   Descriptor,
+  IdentifyMissing,
   InvalidHandler,
   Logger,
   NormalizedTransferResult,
@@ -34,6 +35,7 @@ export interface NormalizerOptions {
   unknown?: UnknownHandler;
   invalid?: InvalidHandler;
   deprecated?: DeprecatedHandler;
+  missing?: IdentifyMissing;
 }
 
 export const normalize = (
@@ -48,6 +50,7 @@ export class Normalizer {
   private _invalidHandler: InvalidHandler;
   private _deprecatedHandler: DeprecatedHandler;
   private _hasDeprecationWarned!: ReturnType<typeof createAutoChecklist>;
+  private _identifyMissing: IdentifyMissing;
 
   constructor(schemas: Array<Schema<any>>, opts?: NormalizerOptions) {
     // istanbul ignore next
@@ -57,6 +60,7 @@ export class Normalizer {
       unknown = defaultUnknownHandler,
       invalid = defaultInvalidHandler,
       deprecated = defaultDeprecatedHandler,
+      missing = (key: string, options: Options) => !(key in options),
     } = opts || {};
 
     this._utils = {
@@ -73,6 +77,7 @@ export class Normalizer {
     this._unknownHandler = unknown;
     this._invalidHandler = invalid;
     this._deprecatedHandler = deprecated;
+    this._identifyMissing = missing;
 
     this.cleanHistory();
   }
@@ -100,7 +105,7 @@ export class Normalizer {
 
     for (const key of Object.keys(this._utils.schemas)) {
       const schema = this._utils.schemas[key];
-      if (!(key in normalized)) {
+      if (this._identifyMissing(key, normalized)) {
         const defaultResult = normalizeDefaultResult(
           schema.default(this._utils),
         );
@@ -114,7 +119,7 @@ export class Normalizer {
 
     for (const key of Object.keys(this._utils.schemas)) {
       const schema = this._utils.schemas[key];
-      if (key in normalized) {
+      if (!this._identifyMissing(key, normalized)) {
         normalized[key] = schema.postprocess(normalized[key], this._utils);
       }
     }
@@ -129,7 +134,7 @@ export class Normalizer {
     const transferredOptionsArray: Options[] = [];
 
     const [knownOptionNames, unknownOptionNames] = partition(
-      Object.keys(options),
+      Object.keys(options).filter(key => !this._identifyMissing(key, options)),
       key => key in this._utils.schemas,
     );
 
@@ -218,10 +223,9 @@ export class Normalizer {
       if ('remain' in redirectResult) {
         const remainingValue = redirectResult.remain!;
 
-        normalized[key] =
-          key in normalized
-            ? schema.overlap(normalized[key], remainingValue, this._utils)
-            : remainingValue;
+        normalized[key] = !this._identifyMissing(key, normalized)
+          ? schema.overlap(normalized[key], remainingValue, this._utils)
+          : remainingValue;
 
         warnDeprecated({ value: remainingValue });
       }
