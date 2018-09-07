@@ -47,6 +47,8 @@ export type DeprecatedHandler = (
   utils: Utils,
 ) => string;
 
+export type IdentifyMissing = (key: string, options: Options) => boolean;
+
 export type OptionKey = string;
 export type OptionValue = any;
 export interface OptionPair {
