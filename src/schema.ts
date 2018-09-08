@@ -1,3 +1,4 @@
+import { VALUE_UNCHANGED } from './constants';
 import {
   DefaultResult,
   DeprecatedResult,
@@ -155,12 +156,12 @@ export abstract class Schema<
     return currentValue;
   }
 
-  public preprocess(value: unknown, _utils: Utils): unknown {
+  public preprocess(value: unknown, _utils: Utils): any {
     return value;
   }
 
-  public postprocess(value: $Value, _utils: Utils): unknown {
-    return value;
+  public postprocess(_value: $Value, _utils: Utils): any {
+    return VALUE_UNCHANGED;
   }
 }
 

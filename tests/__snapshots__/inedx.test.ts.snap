@@ -12,6 +12,8 @@ Array [
 ]
 `;
 
+exports[`postprocess schema throw error for invalid postprocessed value 1`] = `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`;
+
 exports[`redirect 1`] = `
 Object {
   "parser": "css",
