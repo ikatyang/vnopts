@@ -79,6 +79,8 @@ interface NormalizerOptions {
   unknown?: UnknownHandler;
   invalid?: InvalidHandler;
   deprecated?: DeprecatedHandler;
+  missing?: IdentifyMissing;
+  required?: IdentifyRequired;
 }
 ```
 
@@ -141,6 +143,27 @@ type DeprecatedHandler = (
 ```
 
 Returns a deprecation warning.
+
+#### IdentifyMissing
+
+Defaults to `() => false`.
+
+```ts
+type IdentifyMissing = (key: string, options: Options) => boolean;
+```
+
+Returns a boolean to indicate if `key` is _missing_ in `options`.
+(`!(key in options)` is always considered missing.)
+
+#### IdentifyRequired
+
+Defaults to `() => false`.
+
+```ts
+type IdentifyRequired = (key: string) => boolean;
+```
+
+Returns a boolean to indicate if `key` is required in the output.
 
 ### Schemas
 

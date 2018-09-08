@@ -12,6 +12,8 @@ Array [
 ]
 `;
 
+exports[`postprocess schema throw error for invalid postprocessed value 1`] = `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`;
+
 exports[`redirect 1`] = `
 Object {
   "parser": "css",
@@ -23,3 +25,5 @@ Array [
   "{ parser: \\"postcss\\" } is deprecated; we now treat it as { parser: \\"css\\" }.",
 ]
 `;
+
+exports[`required 1`] = `"Invalid \\"<key>\\" value. Expected anything, but received nothing."`;

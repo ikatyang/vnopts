@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import { VALUE_NOT_EXIST } from '../../constants';
 import { InvalidHandler, NormalizedExpectedResult } from '../../types';
 
 const INDENTATION = ' '.repeat(2);
@@ -17,7 +18,11 @@ export const commonInvalidHandler: InvalidHandler = (key, value, utils) => {
       [
         `Invalid ${chalk.red(utils.descriptor.key(key))} value.`,
         `Expected ${chalk.blue(description)},`,
-        `but received ${chalk.red(utils.descriptor.value(value))}.`,
+        `but received ${
+          value === VALUE_NOT_EXIST
+            ? chalk.gray('nothing')
+            : chalk.red(utils.descriptor.value(value))
+        }.`,
       ].join(' '),
     );
   }
@@ -28,7 +33,11 @@ export const commonInvalidHandler: InvalidHandler = (key, value, utils) => {
         [
           `Invalid ${chalk.red(utils.descriptor.key(key))} value.`,
           `Expected ${chalk.blue(valueTitle)},`,
-          `but received ${chalk.red(utils.descriptor.value(value))}.`,
+          `but received ${
+            value === VALUE_NOT_EXIST
+              ? chalk.gray('nothing')
+              : chalk.red(utils.descriptor.value(value))
+          }.`,
         ].join(' '),
         valueDescriptions
           .map(valueDescription =>
