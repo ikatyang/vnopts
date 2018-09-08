@@ -1,3 +1,4 @@
+import { VALUE_NOT_EXIST } from './constants';
 import {
   defaultDeprecatedHandler,
   defaultDescriptor,
@@ -9,8 +10,10 @@ import {
   DeprecatedHandler,
   Descriptor,
   IdentifyMissing,
+  IdentifyRequired,
   InvalidHandler,
   Logger,
+  NormalizedInvalidHandler,
   NormalizedTransferResult,
   OptionPair,
   Options,
@@ -23,6 +26,7 @@ import {
   normalizeDefaultResult,
   normalizeDeprecatedResult,
   normalizeForwardResult,
+  normalizeInvalidHandler,
   normalizeRedirectResult,
   normalizeValidateResult,
   partition,
@@ -36,6 +40,7 @@ export interface NormalizerOptions {
   invalid?: InvalidHandler;
   deprecated?: DeprecatedHandler;
   missing?: IdentifyMissing;
+  required?: IdentifyRequired;
 }
 
 export const normalize = (
@@ -47,10 +52,11 @@ export const normalize = (
 export class Normalizer {
   private _utils: Utils;
   private _unknownHandler: UnknownHandler;
-  private _invalidHandler: InvalidHandler;
+  private _invalidHandler: NormalizedInvalidHandler;
   private _deprecatedHandler: DeprecatedHandler;
   private _hasDeprecationWarned!: ReturnType<typeof createAutoChecklist>;
   private _identifyMissing: IdentifyMissing;
+  private _identifyRequired: IdentifyRequired;
 
   constructor(schemas: Array<Schema<any>>, opts?: NormalizerOptions) {
     // istanbul ignore next
@@ -60,7 +66,8 @@ export class Normalizer {
       unknown = defaultUnknownHandler,
       invalid = defaultInvalidHandler,
       deprecated = defaultDeprecatedHandler,
-      missing = (key: string, options: Options) => !(key in options),
+      missing = () => false,
+      required = () => false,
     } = opts || {};
 
     this._utils = {
@@ -75,9 +82,10 @@ export class Normalizer {
     };
 
     this._unknownHandler = unknown;
-    this._invalidHandler = invalid;
+    this._invalidHandler = normalizeInvalidHandler(invalid);
     this._deprecatedHandler = deprecated;
-    this._identifyMissing = missing;
+    this._identifyMissing = (k, o) => !(k in o) || missing(k, o);
+    this._identifyRequired = required;
 
     this.cleanHistory();
   }
@@ -105,7 +113,7 @@ export class Normalizer {
 
     for (const key of Object.keys(this._utils.schemas)) {
       const schema = this._utils.schemas[key];
-      if (this._identifyMissing(key, normalized)) {
+      if (!(key in normalized)) {
         const defaultResult = normalizeDefaultResult(
           schema.default(this._utils),
         );
@@ -119,8 +127,14 @@ export class Normalizer {
 
     for (const key of Object.keys(this._utils.schemas)) {
       const schema = this._utils.schemas[key];
-      if (!this._identifyMissing(key, normalized)) {
+      if (key in normalized) {
         normalized[key] = schema.postprocess(normalized[key], this._utils);
+      }
+    }
+
+    for (const key of Object.keys(this._utils.schemas)) {
+      if (!(key in normalized) && this._identifyRequired(key)) {
+        throw this._invalidHandler(key, VALUE_NOT_EXIST, this._utils);
       }
     }
 
@@ -147,16 +161,7 @@ export class Normalizer {
         value,
       );
       if (validateResult !== true) {
-        const { value: invalidValue } = validateResult;
-        const errorMessageOrError = this._invalidHandler(
-          key,
-          invalidValue,
-          this._utils,
-        );
-
-        throw typeof errorMessageOrError === 'string'
-          ? new Error(errorMessageOrError)
-          : /* istanbul ignore next*/ errorMessageOrError;
+        throw this._invalidHandler(key, validateResult.value, this._utils);
       }
 
       const appendTransferredOptions = <$Value>(
@@ -223,9 +228,10 @@ export class Normalizer {
       if ('remain' in redirectResult) {
         const remainingValue = redirectResult.remain!;
 
-        normalized[key] = !this._identifyMissing(key, normalized)
-          ? schema.overlap(normalized[key], remainingValue, this._utils)
-          : remainingValue;
+        normalized[key] =
+          key in normalized
+            ? schema.overlap(normalized[key], remainingValue, this._utils)
+            : remainingValue;
 
         warnDeprecated({ value: remainingValue });
       }

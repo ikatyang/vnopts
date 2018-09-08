@@ -2,10 +2,12 @@ import {
   DefaultResult,
   DeprecatedResult,
   ForwardResult,
+  InvalidHandler,
   NormalizedDefaultResult,
   NormalizedDeprecatedResult,
   NormalizedDeprecatedResultWithTrue,
   NormalizedForwardResult,
+  NormalizedInvalidHandler,
   NormalizedRedirectResult,
   NormalizedTransferResult,
   NormalizedValidateResult,
@@ -123,6 +125,17 @@ export function comparePrimitive(
   }
 
   return (a as string).localeCompare(b as string);
+}
+
+export function normalizeInvalidHandler(
+  invalidHandler: InvalidHandler,
+): NormalizedInvalidHandler {
+  return (...args) => {
+    const errorMessageOrError = invalidHandler(...args);
+    return typeof errorMessageOrError === 'string'
+      ? new Error(errorMessageOrError)
+      : /* istanbul ignore next*/ errorMessageOrError;
+  };
 }
 
 export function normalizeDefaultResult<$Value>(
