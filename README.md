@@ -386,21 +386,25 @@ type SchemaExpectedHandler =
 
 type ExpectedResult =
   | string
-  | { description: string }
+  | { text: string }
   | {
-      description?: string;
-      valueTitle: string;
-      valueDescriptions: ExpectedResult[];
+      text?: string;
+      list: {
+        title: string;
+        values: ExpectedResult[];
+      };
     };
 ```
 
-Returns the description and/or the detailed description for the expected value.
+Returns the description for the expected value in the form of text and/or list.
 For example the following `ExpectedResult`:
 
 ```json
 {
-  "valueTitle": "one of the following values",
-  "valueDescriptions": ["foo", "bar", "baz"]
+  "list": {
+    "title": "one of the following values",
+    "values": ["foo", "bar", "baz"]
+  }
 }
 ```
 
@@ -413,9 +417,9 @@ Invalid `<key>` value. Expected `one of the following values`, but received `<va
 - `"baz"`
 ```
 
-If both `description` and `valueTitle` are returned,
-`description` will be chosen if its length is less than `loggerPrintWidth`,
-otherwise `valueTitle`.
+If both `text` and `list` are returned,
+`text` will be chosen if its width is the minimum one or its width is less than `loggerPrintWidth`,
+otherwise `list`.
 
 #### validate
 

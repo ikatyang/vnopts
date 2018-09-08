@@ -47,18 +47,16 @@ export class ChoiceSchema extends Schema<ChoiceValue, ChoiceSchemaParameters> {
       .sort(comparePrimitive)
       .map(descriptor.value);
 
-    if (choiceDescriptions.length === 1) {
-      return choiceDescriptions[0];
-    }
-
     const head = choiceDescriptions.slice(0, -2);
     const tail = choiceDescriptions.slice(-2);
     const message = head.concat(tail.join(' or ')).join(', ');
 
     return {
-      description: message,
-      valueTitle: 'one of the following values',
-      valueDescriptions: choiceDescriptions,
+      text: message,
+      list: {
+        title: 'one of the following values',
+        values: choiceDescriptions,
+      },
     };
   }
 

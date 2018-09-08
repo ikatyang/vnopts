@@ -1,72 +1,75 @@
 import chalk from 'chalk';
 import { VALUE_NOT_EXIST } from '../../constants';
-import { InvalidHandler, NormalizedExpectedResult } from '../../types';
+import {
+  Descriptor,
+  InvalidHandler,
+  NormalizedExpectedResult,
+  OptionKey,
+  OptionValue,
+} from '../../types';
 
 const INDENTATION = ' '.repeat(2);
 
 export const commonInvalidHandler: InvalidHandler = (key, value, utils) => {
-  const {
-    description,
-    valueTitle,
-    valueDescriptions,
-  } = utils.normalizeExpectedResult(utils.schemas[key].expected(utils));
+  const { text, list } = utils.normalizeExpectedResult(
+    utils.schemas[key].expected(utils),
+  );
 
-  const possibleDescriptions: string[] = [];
+  const descriptions: string[] = [];
 
-  if (description) {
-    possibleDescriptions.push(
-      [
-        `Invalid ${chalk.red(utils.descriptor.key(key))} value.`,
-        `Expected ${chalk.blue(description)},`,
-        `but received ${
-          value === VALUE_NOT_EXIST
-            ? chalk.gray('nothing')
-            : chalk.red(utils.descriptor.value(value))
-        }.`,
-      ].join(' '),
+  // istanbul ignore else
+  if (text) {
+    descriptions.push(getDescription(key, value, text, utils.descriptor));
+  }
+
+  if (list) {
+    descriptions.push(
+      [getDescription(key, value, list.title, utils.descriptor)]
+        .concat(
+          list.values.map(valueDescription =>
+            getListDescription(valueDescription, utils.loggerPrintWidth),
+          ),
+        )
+        .join('\n'),
     );
   }
 
-  if (valueTitle) {
-    possibleDescriptions.push(
-      [
-        [
-          `Invalid ${chalk.red(utils.descriptor.key(key))} value.`,
-          `Expected ${chalk.blue(valueTitle)},`,
-          `but received ${
-            value === VALUE_NOT_EXIST
-              ? chalk.gray('nothing')
-              : chalk.red(utils.descriptor.value(value))
-          }.`,
-        ].join(' '),
-        valueDescriptions
-          .map(valueDescription =>
-            getNestedDescription(valueDescription, utils.loggerPrintWidth),
-          )
-          .join('\n'),
-      ].join('\n'),
-    );
-  }
-
-  return chooseDescription(possibleDescriptions, utils.loggerPrintWidth);
+  return chooseDescription(descriptions, utils.loggerPrintWidth);
 };
 
-function getNestedDescription(
-  { description, valueTitle, valueDescriptions }: NormalizedExpectedResult,
+function getDescription(
+  key: OptionKey,
+  value: OptionValue,
+  expected: string,
+  descriptor: Descriptor,
+) {
+  return [
+    `Invalid ${chalk.red(descriptor.key(key))} value.`,
+    `Expected ${chalk.blue(expected)},`,
+    `but received ${
+      value === VALUE_NOT_EXIST
+        ? chalk.gray('nothing')
+        : chalk.red(descriptor.value(value))
+    }.`,
+  ].join(' ');
+}
+
+function getListDescription(
+  { text, list }: NormalizedExpectedResult,
   printWidth: number,
 ): string {
-  const possibleDescriptions: string[] = [];
+  const descriptions: string[] = [];
 
-  if (description) {
-    possibleDescriptions.push(`- ${chalk.blue(description)}`);
+  if (text) {
+    descriptions.push(`- ${chalk.blue(text)}`);
   }
 
-  if (valueTitle) {
-    possibleDescriptions.push(
-      [`- ${chalk.blue(valueTitle)}:`]
+  if (list) {
+    descriptions.push(
+      [`- ${chalk.blue(list.title)}:`]
         .concat(
-          valueDescriptions.map(valueDescription =>
-            getNestedDescription(
+          list.values.map(valueDescription =>
+            getListDescription(
               valueDescription,
               printWidth - INDENTATION.length,
             ).replace(/^|\n/g, `$&${INDENTATION}`),
@@ -76,13 +79,20 @@ function getNestedDescription(
     );
   }
 
-  return chooseDescription(possibleDescriptions, printWidth);
+  return chooseDescription(descriptions, printWidth);
 }
 
-function chooseDescription(possibleDescriptions: string[], printWidth: number) {
-  return possibleDescriptions.length === 1
-    ? possibleDescriptions[0]
-    : possibleDescriptions[0].length > printWidth
-      ? possibleDescriptions[1]
-      : possibleDescriptions[0];
+function chooseDescription(descriptions: string[], printWidth: number) {
+  if (descriptions.length === 1) {
+    return descriptions[0];
+  }
+
+  const [firstDescription, secondDescription] = descriptions;
+  const [firstWidth, secondWidth] = descriptions.map(
+    description => description.split('\n', 1)[0].length,
+  );
+
+  return firstWidth > printWidth && firstWidth > secondWidth
+    ? secondDescription
+    : firstDescription;
 }

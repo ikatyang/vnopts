@@ -150,19 +150,26 @@ export function normalizeExpectedResult(
   result: ExpectedResult,
 ): NormalizedExpectedResult {
   if (typeof result === 'string') {
-    return { valueDescriptions: [], description: result };
+    return { text: result };
   }
 
-  if (!('valueTitle' in result)) {
-    return { valueDescriptions: [], description: result.description };
-  }
+  const { text, list } = result;
 
-  const { description, valueTitle, valueDescriptions } = result;
+  assert(
+    (text || list) !== undefined,
+    'Unexpected `expected` result, there should be at least one field.',
+  );
+
+  if (!list) {
+    return { text };
+  }
 
   return {
-    description,
-    valueTitle,
-    valueDescriptions: valueDescriptions.map(normalizeExpectedResult),
+    text,
+    list: {
+      title: list.title,
+      values: list.values.map(normalizeExpectedResult),
+    },
   };
 }
 
@@ -241,4 +248,11 @@ export function normalizeRedirectResult<$Value>(
     : typeof result === 'object' && 'remain' in result
       ? { remain: result.remain, redirect }
       : { redirect };
+}
+
+export function assert(isValid: boolean, message: string) {
+  // istanbul ignore if
+  if (!isValid) {
+    throw new Error(message);
+  }
 }

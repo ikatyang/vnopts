@@ -115,23 +115,21 @@ export type NormalizedDeprecatedResultWithTrue<$Value> =
 
 export type ExpectedResult =
   | string
-  | { description: string }
   | {
-      description?: string;
-      valueTitle: string;
-      valueDescriptions: ExpectedResult[];
+      // at least one of the following field exists
+      text?: string;
+      list?: {
+        title: string;
+        values: ExpectedResult[];
+      };
     };
-export type NormalizedExpectedResult =
-  | {
-      description: string;
-      valueTitle?: never;
-      valueDescriptions: NormalizedExpectedResult[];
-    }
-  | {
-      description?: string;
-      valueTitle: string;
-      valueDescriptions: NormalizedExpectedResult[];
-    };
+export interface NormalizedExpectedResult {
+  text?: string;
+  list?: {
+    title: string;
+    values: NormalizedExpectedResult[];
+  };
+}
 
 export type DefaultResult<$Value> = undefined | { value?: $Value };
 export interface NormalizedDefaultResult<$Value> {

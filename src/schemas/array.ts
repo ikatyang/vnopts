@@ -31,18 +31,17 @@ export class ArraySchema<$ValueSchema extends Schema<any>> extends Schema<
   }
 
   public expected(utils: Utils): ExpectedResult {
-    const {
-      description,
-      valueTitle,
-      valueDescriptions,
-    } = utils.normalizeExpectedResult(this._valueSchema.expected(utils));
+    const { text, list } = utils.normalizeExpectedResult(
+      this._valueSchema.expected(utils),
+    );
 
-    return valueTitle
-      ? {
-          valueTitle: `an array of the following values`,
-          valueDescriptions: [{ valueTitle, valueDescriptions }],
-        }
-      : { description: `an array of ${description}` };
+    return {
+      text: text && `an array of ${text}`,
+      list: list && {
+        title: `an array of the following values`,
+        values: [{ list }],
+      },
+    };
   }
 
   public validate(value: unknown, utils: Utils): ValidateResult {
