@@ -40,6 +40,11 @@ export type InvalidHandler = (
   value: OptionValue,
   utils: Utils,
 ) => string | Error;
+export type NormalizedInvalidHandler = (
+  key: OptionKey,
+  value: OptionValue,
+  utils: Utils,
+) => Error;
 
 export type DeprecatedHandler = (
   keyOrPair: OptionKey | OptionPair,
@@ -48,6 +53,7 @@ export type DeprecatedHandler = (
 ) => string;
 
 export type IdentifyMissing = (key: string, options: Options) => boolean;
+export type IdentifyRequired = (key: string) => boolean;
 
 export type OptionKey = string;
 export type OptionValue = any;

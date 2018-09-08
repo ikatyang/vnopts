@@ -79,3 +79,13 @@ describe('missing', () => {
     ).toEqual({ a: defaultValue });
   });
 });
+
+test('required', () => {
+  expect(() =>
+    vnopts.normalize(
+      {},
+      [vnopts.createSchema(vnopts.AnySchema, { name: '<key>' })],
+      { required: () => true },
+    ),
+  ).toThrowErrorMatchingSnapshot();
+});

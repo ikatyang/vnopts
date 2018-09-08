@@ -23,3 +23,5 @@ Array [
   "{ parser: \\"postcss\\" } is deprecated; we now treat it as { parser: \\"css\\" }.",
 ]
 `;
+
+exports[`required 1`] = `"Invalid \\"<key>\\" value. Expected anything, but received nothing."`;
