@@ -1,4 +1,4 @@
-import { VALUE_UNCHANGED, VALUE_NOT_EXIST } from './constants';
+import { VALUE_NOT_EXIST, VALUE_UNCHANGED } from './constants';
 import {
   defaultDeprecatedHandler,
   defaultDescriptor,
@@ -62,9 +62,7 @@ export class Normalizer {
   private _identifyMissing: IdentifyMissing;
   private _identifyRequired: IdentifyRequired;
   private _preprocess: (options: Options) => Options;
-  private _postprocess: (
-    options: Options,
-  ) => Options | typeof VALUE_UNCHANGED;
+  private _postprocess: (options: Options) => Options | typeof VALUE_UNCHANGED;
 
   constructor(schemas: Array<Schema<any>>, opts?: NormalizerOptions) {
     // istanbul ignore next
