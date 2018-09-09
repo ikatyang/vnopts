@@ -1,3 +1,4 @@
+import { VALUE_UNCHANGED } from './constants';
 import { Schema } from './schema';
 import {
   normalizeDefaultResult,
@@ -57,6 +58,12 @@ export type DeprecatedHandler = (
 
 export type IdentifyMissing = (key: string, options: Options) => boolean;
 export type IdentifyRequired = (key: string) => boolean;
+
+export type Preprocess = (options: Options, utils: Utils) => Options;
+export type Postprocess = (
+  options: Options,
+  utils: Utils,
+) => Options | typeof VALUE_UNCHANGED;
 
 export type OptionKey = string;
 export type OptionValue = any;

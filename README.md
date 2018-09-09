@@ -81,6 +81,11 @@ interface NormalizerOptions {
   deprecated?: DeprecatedHandler;
   missing?: IdentifyMissing;
   required?: IdentifyRequired;
+  preprocess?: (options: Options, utils: Utils) => Options;
+  postprocess?: (
+    options: Options,
+    utils: Utils,
+  ) => Options | typeof VALUE_UNCHANGED;
 }
 ```
 
