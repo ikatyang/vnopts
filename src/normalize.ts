@@ -163,11 +163,10 @@ export class Normalizer {
       newOptions[key] = newValue;
     }
 
-    const postprocessed = this._applyPostprocess(newOptions);
+    this._applyPostprocess(newOptions);
+    this._applyRequiredCheck(newOptions);
 
-    this._applyRequiredCheck(postprocessed);
-
-    return postprocessed;
+    return newOptions;
   }
 
   private _applyNormalization(
@@ -330,45 +329,43 @@ export class Normalizer {
     }
   }
 
-  private _applyPostprocess(options: Options) {
-    const postprocessedResult = this._postprocess(options, this._utils);
+  private _applyPostprocess(options: Options): void {
+    const postprocessed = this._postprocess(options, this._utils);
 
-    if (postprocessedResult === VALUE_UNCHANGED) {
-      return options;
+    if (postprocessed === VALUE_UNCHANGED) {
+      return;
     }
 
-    const postprocessed = postprocessedResult;
-
-    const { knownKeys, unknownKeys } = this._partitionOptionKeys(postprocessed);
-
-    for (const key of knownKeys) {
-      this._applyValidation(postprocessed[key], key, this._utils.schemas[key]);
+    if (postprocessed.delete) {
+      for (const deleteKey of postprocessed.delete) {
+        delete options[deleteKey];
+      }
     }
 
-    if (unknownKeys.length === 0) {
-      return postprocessed;
-    }
-
-    const newPostprocessed: Options = {};
-
-    for (const key of knownKeys) {
-      newPostprocessed[key] = postprocessed[key];
-    }
-
-    for (const key of unknownKeys) {
-      const value = postprocessed[key];
-      this._applyUnknownHandler(
-        key,
-        value,
-        newPostprocessed,
-        (knownResultKey, knownResultValue) => {
-          const schema = this._utils.schemas[knownResultKey];
-          this._applyValidation(knownResultValue, knownResultKey, schema);
-          newPostprocessed[knownResultKey] = knownResultValue;
-        },
+    if (postprocessed.override) {
+      const { knownKeys, unknownKeys } = this._partitionOptionKeys(
+        postprocessed.override,
       );
-    }
 
-    return newPostprocessed;
+      for (const key of knownKeys) {
+        const value = postprocessed.override[key];
+        this._applyValidation(value, key, this._utils.schemas[key]);
+        options[key] = value;
+      }
+
+      for (const key of unknownKeys) {
+        const value = postprocessed.override[key];
+        this._applyUnknownHandler(
+          key,
+          value,
+          options,
+          (knownResultKey, knownResultValue) => {
+            const schema = this._utils.schemas[knownResultKey];
+            this._applyValidation(knownResultValue, knownResultKey, schema);
+            options[knownResultKey] = knownResultValue;
+          },
+        );
+      }
+    }
   }
 }

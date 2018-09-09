@@ -129,7 +129,21 @@ describe('postprocess', () => {
   });
 
   describe('normalizer', () => {
-    test('throw invalid postprocess value', () => {
+    test('delete', () => {
+      expect(
+        vnopts.normalize(
+          { [name]: validValue1 },
+          [
+            vnopts.createSchema(vnopts.ChoiceSchema, {
+              name,
+              choices: [validValue1],
+            }),
+          ],
+          { postprocess: () => ({ delete: [name] }) },
+        ),
+      ).toEqual({});
+    });
+    test('throw invalid override value', () => {
       expect(() =>
         vnopts.normalize(
           {},
@@ -139,13 +153,13 @@ describe('postprocess', () => {
               choices: [validValue1],
             }),
           ],
-          { postprocess: () => ({ [name]: invalidValue }) },
+          { postprocess: () => ({ override: { [name]: invalidValue } }) },
         ),
       ).toThrowErrorMatchingInlineSnapshot(
         `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`,
       );
     });
-    test('throw invalid value from postprocessed unknownHandler result', () => {
+    test('throw invalid override value from unknownHandler result', () => {
       expect(() =>
         vnopts.normalize(
           {},
@@ -156,7 +170,7 @@ describe('postprocess', () => {
             }),
           ],
           {
-            postprocess: () => ({ unknown: true }),
+            postprocess: () => ({ override: { unknown: true } }),
             unknown: () => ({ [name]: invalidValue }),
           },
         ),
@@ -164,7 +178,7 @@ describe('postprocess', () => {
         `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`,
       );
     });
-    test('apply valid value from postprocessed unknownHandler result', () => {
+    test('apply valid override value from unknownHandler result', () => {
       expect(
         vnopts.normalize(
           {},
@@ -176,7 +190,7 @@ describe('postprocess', () => {
             vnopts.createSchema(vnopts.AnySchema, { name: 'known' }),
           ],
           {
-            postprocess: () => ({ known: true, unknown: true }),
+            postprocess: () => ({ override: { known: true, unknown: true } }),
             unknown: () => ({ [name]: validValue1 }),
           },
         ),
@@ -185,7 +199,7 @@ describe('postprocess', () => {
         vnopts.normalize(
           {},
           [vnopts.createSchema(vnopts.AnySchema, { name: 'known' })],
-          { postprocess: () => ({ known: true }) },
+          { postprocess: () => ({ override: { known: true } }) },
         ),
       ).toEqual({ known: true });
     });

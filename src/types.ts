@@ -60,10 +60,10 @@ export type IdentifyMissing = (key: string, options: Options) => boolean;
 export type IdentifyRequired = (key: string) => boolean;
 
 export type Preprocess = (options: Options, utils: Utils) => Options;
-export type Postprocess = (
-  options: Options,
-  utils: Utils,
-) => Options | typeof VALUE_UNCHANGED;
+export type Postprocess = (options: Options, utils: Utils) => PostprocessResult;
+export type PostprocessResult =
+  | typeof VALUE_UNCHANGED
+  | { delete?: string[]; override?: Options };
 
 export type OptionKey = string;
 export type OptionValue = any;
