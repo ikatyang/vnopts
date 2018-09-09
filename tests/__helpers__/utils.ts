@@ -22,7 +22,12 @@ export function eachHandler<$Schema extends Schema<any>>(
   {
     logger = createLogger(),
     schemas: predefinedSchemas = [],
-  }: { logger?: FakeLogger; schemas?: Array<Schema<any>> } = {},
+    loggerPrintWidth,
+  }: {
+    logger?: FakeLogger;
+    schemas?: Array<Schema<any>>;
+    loggerPrintWidth?: number;
+  } = {},
 ) {
   return ({ parameters, input, output, hasWarnings }: any) => {
     const schemaParameters = {
@@ -30,7 +35,7 @@ export function eachHandler<$Schema extends Schema<any>>(
       ...schemaConstructorParameters,
       ...parameters,
     };
-    const opts = { logger, unknown: parameters.unknown };
+    const opts = { logger, loggerPrintWidth, unknown: parameters.unknown };
 
     const title = `schema ${JSON.stringify(
       schemaParameters,

@@ -27,6 +27,7 @@ import {
   createAutoChecklist,
   normalizeDefaultResult,
   normalizeDeprecatedResult,
+  normalizeExpectedResult,
   normalizeForwardResult,
   normalizeInvalidHandler,
   normalizeRedirectResult,
@@ -37,6 +38,7 @@ import {
 
 export interface NormalizerOptions {
   logger?: false | Logger;
+  loggerPrintWidth?: number;
   descriptor?: Descriptor;
   unknown?: UnknownHandler;
   invalid?: InvalidHandler;
@@ -68,6 +70,7 @@ export class Normalizer {
     // istanbul ignore next
     const {
       logger = console,
+      loggerPrintWidth = 80,
       descriptor = defaultDescriptor,
       unknown = defaultUnknownHandler,
       invalid = defaultInvalidHandler,
@@ -81,8 +84,10 @@ export class Normalizer {
     this._utils = {
       descriptor,
       logger: /* istanbul ignore next */ logger || { warn: () => {} },
+      loggerPrintWidth,
       schemas: recordFromArray(schemas, 'name'),
       normalizeDefaultResult,
+      normalizeExpectedResult,
       normalizeDeprecatedResult,
       normalizeForwardResult,
       normalizeRedirectResult,

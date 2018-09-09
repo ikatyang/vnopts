@@ -1,11 +1,13 @@
 import {
   DefaultResult,
   DeprecatedResult,
+  ExpectedResult,
   ForwardResult,
   InvalidHandler,
   NormalizedDefaultResult,
   NormalizedDeprecatedResult,
   NormalizedDeprecatedResultWithTrue,
+  NormalizedExpectedResult,
   NormalizedForwardResult,
   NormalizedInvalidHandler,
   NormalizedRedirectResult,
@@ -144,6 +146,33 @@ export function normalizeDefaultResult<$Value>(
   return result === undefined ? {} : result;
 }
 
+export function normalizeExpectedResult(
+  result: ExpectedResult,
+): NormalizedExpectedResult {
+  if (typeof result === 'string') {
+    return { text: result };
+  }
+
+  const { text, list } = result;
+
+  assert(
+    (text || list) !== undefined,
+    'Unexpected `expected` result, there should be at least one field.',
+  );
+
+  if (!list) {
+    return { text };
+  }
+
+  return {
+    text,
+    list: {
+      title: list.title,
+      values: list.values.map(normalizeExpectedResult),
+    },
+  };
+}
+
 export function normalizeValidateResult(
   result: ValidateResult,
   value: unknown,
@@ -219,4 +248,11 @@ export function normalizeRedirectResult<$Value>(
     : typeof result === 'object' && 'remain' in result
       ? { remain: result.remain, redirect }
       : { redirect };
+}
+
+export function assert(isValid: boolean, message: string) {
+  // istanbul ignore if
+  if (!isValid) {
+    throw new Error(message);
+  }
 }
