@@ -19,6 +19,8 @@ import {
   OptionPair,
   Options,
   OptionValue,
+  Postprocess,
+  Preprocess,
   TransferTo,
   UnknownHandler,
   Utils,
@@ -45,8 +47,8 @@ export interface NormalizerOptions {
   deprecated?: DeprecatedHandler;
   missing?: IdentifyMissing;
   required?: IdentifyRequired;
-  preprocess?: (options: Options) => Options;
-  postprocess?: (options: Options) => Options | typeof VALUE_UNCHANGED;
+  preprocess?: Preprocess;
+  postprocess?: Postprocess;
 }
 
 export const normalize = (
@@ -63,8 +65,8 @@ export class Normalizer {
   private _hasDeprecationWarned!: ReturnType<typeof createAutoChecklist>;
   private _identifyMissing: IdentifyMissing;
   private _identifyRequired: IdentifyRequired;
-  private _preprocess: (options: Options) => Options;
-  private _postprocess: (options: Options) => Options | typeof VALUE_UNCHANGED;
+  private _preprocess: Preprocess;
+  private _postprocess: Postprocess;
 
   constructor(schemas: Array<Schema<any>>, opts?: NormalizerOptions) {
     // istanbul ignore next
@@ -112,7 +114,7 @@ export class Normalizer {
   public normalize(options: Options): Options {
     const newOptions: Options = {};
 
-    const preprocessed = this._preprocess(options);
+    const preprocessed = this._preprocess(options, this._utils);
     const restOptionsArray = [preprocessed];
 
     const applyNormalization = () => {
@@ -329,7 +331,7 @@ export class Normalizer {
   }
 
   private _applyPostprocess(options: Options) {
-    const postprocessedResult = this._postprocess(options);
+    const postprocessedResult = this._postprocess(options, this._utils);
 
     if (postprocessedResult === VALUE_UNCHANGED) {
       return options;

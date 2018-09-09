@@ -1,5 +1,4 @@
 import * as vnopts from '../src';
-import { ChoiceSchema, IdentifyMissing } from '../src';
 import { createLogger } from './__helpers__/utils';
 
 const logger = createLogger();
@@ -51,7 +50,8 @@ test('redirect', () => {
 
 describe('missing', () => {
   const name = '<key>';
-  const missing: IdentifyMissing = (key, options) => options[key] === undefined;
+  const missing: vnopts.IdentifyMissing = (key, options) =>
+    options[key] === undefined;
 
   test('missing pair will be filtered', () => {
     expect(
@@ -149,7 +149,12 @@ describe('postprocess', () => {
       expect(() =>
         vnopts.normalize(
           {},
-          [vnopts.createSchema(ChoiceSchema, { name, choices: [validValue1] })],
+          [
+            vnopts.createSchema(vnopts.ChoiceSchema, {
+              name,
+              choices: [validValue1],
+            }),
+          ],
           {
             postprocess: () => ({ unknown: true }),
             unknown: () => ({ [name]: invalidValue }),
@@ -164,7 +169,10 @@ describe('postprocess', () => {
         vnopts.normalize(
           {},
           [
-            vnopts.createSchema(ChoiceSchema, { name, choices: [validValue1] }),
+            vnopts.createSchema(vnopts.ChoiceSchema, {
+              name,
+              choices: [validValue1],
+            }),
             vnopts.createSchema(vnopts.AnySchema, { name: 'known' }),
           ],
           {
