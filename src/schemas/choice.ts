@@ -15,7 +15,7 @@ interface ChoiceInfo {
   deprecated?: boolean;
   redirect?: TransferTo;
   forward?: TransferTo;
-  /** do not show in `expected` */
+  /** do not show this value in `expected` */
   hidden?: boolean;
 }
 
