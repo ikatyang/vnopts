@@ -78,7 +78,7 @@ describe('missing', () => {
         [
           vnopts.createSchema(vnopts.AnySchema, {
             name,
-            default: { value: defaultValue },
+            default: defaultValue,
           }),
         ],
         { missing },

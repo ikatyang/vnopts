@@ -27,7 +27,6 @@ import {
 } from './types';
 import {
   createAutoChecklist,
-  normalizeDefaultResult,
   normalizeDeprecatedResult,
   normalizeExpectedResult,
   normalizeForwardResult,
@@ -88,7 +87,6 @@ export class Normalizer {
       logger: /* istanbul ignore next */ logger || { warn: () => {} },
       loggerPrintWidth,
       schemas: recordFromArray(schemas, 'name'),
-      normalizeDefaultResult,
       normalizeExpectedResult,
       normalizeDeprecatedResult,
       normalizeForwardResult,
@@ -133,11 +131,9 @@ export class Normalizer {
     for (const key of Object.keys(this._utils.schemas)) {
       const schema = this._utils.schemas[key];
       if (!(key in newOptions)) {
-        const defaultResult = normalizeDefaultResult(
-          schema.default(this._utils),
-        );
-        if ('value' in defaultResult) {
-          restOptionsArray.push({ [key]: defaultResult.value! });
+        const defaultResult = schema.default(this._utils);
+        if (defaultResult !== VALUE_NOT_EXIST) {
+          restOptionsArray.push({ [key]: defaultResult });
         }
       }
     }

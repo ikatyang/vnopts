@@ -1,10 +1,8 @@
 import {
-  DefaultResult,
   DeprecatedResult,
   ExpectedResult,
   ForwardResult,
   InvalidHandler,
-  NormalizedDefaultResult,
   NormalizedDeprecatedResult,
   NormalizedDeprecatedResultWithTrue,
   NormalizedExpectedResult,
@@ -138,12 +136,6 @@ export function normalizeInvalidHandler(
       ? new Error(errorMessageOrError)
       : /* istanbul ignore next*/ errorMessageOrError;
   };
-}
-
-export function normalizeDefaultResult<$Value>(
-  result: DefaultResult<$Value>,
-): NormalizedDefaultResult<$Value> {
-  return result === undefined ? {} : result;
 }
 
 export function normalizeExpectedResult(

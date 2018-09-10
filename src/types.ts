@@ -1,7 +1,6 @@
-import { VALUE_UNCHANGED } from './constants';
+import { VALUE_NOT_EXIST, VALUE_UNCHANGED } from './constants';
 import { Schema } from './schema';
 import {
-  normalizeDefaultResult,
   normalizeDeprecatedResult,
   normalizeExpectedResult,
   normalizeForwardResult,
@@ -15,7 +14,6 @@ export interface Utils {
   loggerPrintWidth: number;
   descriptor: Descriptor;
   schemas: Record<string, Schema<any>>;
-  normalizeDefaultResult: typeof normalizeDefaultResult;
   normalizeExpectedResult: typeof normalizeExpectedResult;
   normalizeDeprecatedResult: typeof normalizeDeprecatedResult;
   normalizeForwardResult: typeof normalizeForwardResult;
@@ -138,7 +136,4 @@ export interface NormalizedExpectedResult {
   };
 }
 
-export type DefaultResult<$Value> = undefined | { value?: $Value };
-export interface NormalizedDefaultResult<$Value> {
-  value?: $Value;
-}
+export type DefaultResult<$Value> = typeof VALUE_NOT_EXIST | $Value;

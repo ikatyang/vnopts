@@ -1,4 +1,4 @@
-import { VALUE_UNCHANGED } from './constants';
+import { VALUE_NOT_EXIST, VALUE_UNCHANGED } from './constants';
 import {
   DefaultResult,
   DeprecatedResult,
@@ -123,7 +123,7 @@ export abstract class Schema<
   }
 
   public default(_utils: Utils): DefaultResult<$Value> {
-    return undefined;
+    return VALUE_NOT_EXIST;
   }
 
   // istanbul ignore next: this is actually an abstract method but we need a placeholder to get `function.length`

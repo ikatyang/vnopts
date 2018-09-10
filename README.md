@@ -375,12 +375,10 @@ type SchemaDefaultHandler =
   | DefaultResult
   | ((schema: Schema, utils: Utils) => DefaultResult);
 
-type DefaultResult = undefined | { value?: any };
+type DefaultResult = typeof VALUE_NOT_EXIST | any;
 ```
 
-`undefined` represents no default value,
-default values are wrapped in an object's `value` field
-to avoid the ambiguity between missing and `undefined`.
+`VALUE_NOT_EXIST` represents no default value.
 
 #### expected
 

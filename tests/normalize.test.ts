@@ -41,7 +41,7 @@ const redirectTo = (k: OptionKey) => (_k: OptionKey, v: OptionValue) => ({
 
 describe.each`
   parameters                                           | input                        | output                                 | hasWarnings
-  ${{ default: { value } }}                            | ${{}}                        | ${option}                              | ${false}
+  ${{ default: value }}                                | ${{}}                        | ${option}                              | ${false}
   ${{ validate: false }}                               | ${option}                    | ${Error}                               | ${false}
   ${{ validate: { value: invalidValue } }}             | ${option}                    | ${Error}                               | ${false}
   ${{ deprecated: true }}                              | ${option}                    | ${option}                              | ${true}
