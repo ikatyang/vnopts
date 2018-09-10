@@ -85,7 +85,7 @@ interface NormalizerOptions {
   postprocess?: (
     options: Options,
     utils: Utils,
-  ) => Options | typeof VALUE_UNCHANGED;
+  ) => typeof VALUE_UNCHANGED | { delete?: string[]; override?: Options };
 }
 ```
 
