@@ -15,6 +15,7 @@ const deprecatedValue = '<deprecated-value>';
 const forwardValue = '<forward-value>';
 const redirectValue = '<redirect-value>';
 const unknownValue = '<unknown-value>';
+const hiddenValue = '<hidden-value>';
 
 describe.each`
   parameters            | input                          | output                                   | hasWarnings
@@ -35,6 +36,7 @@ describe.each`
         { value: deprecatedValue, deprecated: true },
         { value: forwardValue, forward: transferPair },
         { value: redirectValue, redirect: transferPair },
+        { value: hiddenValue, hidden: true },
       ],
     },
     { schemas: [new AnySchema({ name: transferKey })] },

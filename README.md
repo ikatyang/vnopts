@@ -277,6 +277,7 @@ interface ChoiceSchemaParameters extends SchemaHandlers {
     | {
         value: undefined | null | boolean | number | string;
         deprecated?: boolean;
+        hidden?: boolean; // do not show this value in `expected`
         redirect?: /* key */ string | { key: string; value: any };
         forward?: /* key */ string | { key: string; value: any };
       }

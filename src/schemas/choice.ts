@@ -15,6 +15,8 @@ interface ChoiceInfo {
   deprecated?: boolean;
   redirect?: TransferTo;
   forward?: TransferTo;
+  /** do not show this value in `expected` */
+  hidden?: boolean;
 }
 
 type ChoiceValue = undefined | null | boolean | number | string;
@@ -42,7 +44,7 @@ export class ChoiceSchema extends Schema<ChoiceValue, ChoiceSchemaParameters> {
   public expected({ descriptor }: Utils): ExpectedResult {
     const choiceDescriptions = Array.from(this._choices.keys())
       .map(value => this._choices.get(value)!)
-      .filter(choiceInfo => !choiceInfo.deprecated)
+      .filter(({ hidden }) => !hidden)
       .map(choiceInfo => choiceInfo.value)
       .sort(comparePrimitive)
       .map(descriptor.value);
