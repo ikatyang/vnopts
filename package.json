@@ -30,7 +30,7 @@
     "@types/leven": "2.1.1",
     "@types/node": "6.0.117",
     "has-ansi": "3.0.0",
-    "jest": "23.5.0",
+    "jest": "23.6.0",
     "jest-snapshot-serializer-ansi": "1.0.0",
     "prettier": "1.14.2",
     "prettier-config-ikatyang": "1.1.1",
