@@ -30,6 +30,7 @@ exports[`(simple expected values) schema {"valueSchema":{"name":"<key>"}} with i
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"<value>"} 1`] = `
 "Invalid \\"<key>\\" value. Expected an array of the following values, but received \\"<value>\\".
 - one of the following values:
+  - \\"<deprecated-value>\\"
   - \\"<forward-value>\\"
   - \\"<redirect-value>\\"
   - \\"<transfer-value>\\"
@@ -45,6 +46,7 @@ Array [
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<invalid-value>"]} 1`] = `
 "Invalid \\"<key>\\" value. Expected an array of the following values, but received [\\"<invalid-value>\\"].
 - one of the following values:
+  - \\"<deprecated-value>\\"
   - \\"<forward-value>\\"
   - \\"<redirect-value>\\"
   - \\"<transfer-value>\\"
