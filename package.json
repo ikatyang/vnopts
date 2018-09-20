@@ -32,7 +32,7 @@
     "has-ansi": "3.0.0",
     "jest": "23.6.0",
     "jest-snapshot-serializer-ansi": "1.0.0",
-    "prettier": "1.14.2",
+    "prettier": "1.14.3",
     "prettier-config-ikatyang": "1.1.1",
     "standard-version": "4.4.0",
     "strip-ansi": "4.0.0",
