@@ -28,10 +28,10 @@
   resolved "https://registry.yarnpkg.com/@types/leven/-/leven-2.1.1.tgz#7cdc02ec636f80dc0bb0a53d8ee7eff2d8e8e1d8"
   integrity sha512-f74SsCQnQzm244o5LHZgSLijrwG5e9BgkMHGbDlQThfh42q5RG4c+RNzUvZ347wAlQYD9kwu64qSNylxZdKs6w==
 
-"@types/node@6.0.118":
-  version "6.0.118"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.118.tgz#8014a9b1dee0b72b4d7cd142563f1af21241c3a2"
-  integrity sha512-N33cKXGSqhOYaPiT4xUGsYlPPDwFtQM/6QxJxuMXA/7BcySW+lkn2yigWP7vfs4daiL/7NJNU6DMCqg5N4B+xQ==
+"@types/node@9.6.39":
+  version "9.6.39"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.39.tgz#111cb4f5591cb6945aad34733b4e40bfd59b58fc"
+  integrity sha512-c3OkjgNpSMdHan56WhklP0FMOk5ocilKz2Mpa0NOGzu8jw5YERjCf9FG0epYB1+TxScv/oI4uJ204u2mUg7Hcw==
 
 JSONStream@^1.0.4:
   version "1.3.4"
