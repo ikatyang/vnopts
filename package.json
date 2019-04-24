@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/jest": "23.3.3",
     "@types/leven": "2.1.1",
-    "@types/node": "6.0.118",
+    "@types/node": "11.13.7",
     "has-ansi": "3.0.0",
     "jest": "23.6.0",
     "jest-snapshot-serializer-ansi": "1.0.0",
