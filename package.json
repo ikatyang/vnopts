@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "leven": "^2.1.0",
+    "leven": "^3.0.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
