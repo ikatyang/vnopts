@@ -26,7 +26,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@types/jest": "23.3.3",
+    "@types/jest": "23.3.14",
     "@types/leven": "2.1.1",
     "@types/node": "6.0.118",
     "has-ansi": "3.0.0",
