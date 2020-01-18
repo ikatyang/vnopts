@@ -21,7 +21,7 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
+    "chalk": "^3.0.0",
     "leven": "^2.1.0",
     "tslib": "^1.9.3"
   },
