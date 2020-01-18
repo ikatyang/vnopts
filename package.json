@@ -29,7 +29,7 @@
     "@types/jest": "23.3.3",
     "@types/leven": "2.1.1",
     "@types/node": "6.0.118",
-    "has-ansi": "3.0.0",
+    "has-ansi": "4.0.0",
     "jest": "23.6.0",
     "jest-snapshot-serializer-ansi": "1.0.0",
     "prettier": "1.14.3",
