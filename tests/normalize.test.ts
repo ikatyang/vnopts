@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest'
 import {
   createSchema,
   Normalizer,
@@ -5,39 +6,39 @@ import {
   OptionValue,
   Schema,
   SchemaParameters,
-} from '../src';
-import { createLogger, eachHandler } from './__helpers__/utils';
+} from '../src/index.js'
+import { createLogger, eachHandler } from './__helpers__/utils.js'
 
 class TestSchema extends Schema<any, SchemaParameters<any>> {
   public expected() {
-    return '<expected>';
+    return '<expected>'
   }
   public validate() {
-    return true;
+    return true
   }
 }
 
-const name = '<key>';
-const value = '<value>';
-const option = { [name]: value };
-const transferKey = '<transfer-key>';
-const transferValue = '<transfer-value>';
-const transferPair = { key: transferKey, value: transferValue };
-const transfer = { [transferKey]: transferValue };
-const unknownKey = '<unknown-key>';
-const unknownValue = '<unknown-value>';
-const unknown = { [unknownKey]: unknownValue };
-const veryUnknown = { veryUnknown: '<very-unknown-value>' };
-const overlapKey = '<overlap-key>';
-const overlapValue = '<overlap-value>';
-const overlap = { [overlapKey]: overlapValue };
-const invalidValue = '<invalid-value>';
-const knownKey = '<known-key>';
+const name = '<key>'
+const value = '<value>'
+const option = { [name]: value }
+const transferKey = '<transfer-key>'
+const transferValue = '<transfer-value>'
+const transferPair = { key: transferKey, value: transferValue }
+const transfer = { [transferKey]: transferValue }
+const unknownKey = '<unknown-key>'
+const unknownValue = '<unknown-value>'
+const unknown = { [unknownKey]: unknownValue }
+const veryUnknown = { veryUnknown: '<very-unknown-value>' }
+const overlapKey = '<overlap-key>'
+const overlapValue = '<overlap-value>'
+const overlap = { [overlapKey]: overlapValue }
+const invalidValue = '<invalid-value>'
+const knownKey = '<known-key>'
 
-const passThrough = (k: OptionKey, v: OptionValue) => ({ [k]: v });
+const passThrough = (k: OptionKey, v: OptionValue) => ({ [k]: v })
 const redirectTo = (k: OptionKey) => (_k: OptionKey, v: OptionValue) => ({
   [k]: v,
-});
+})
 
 describe.each`
   parameters                                           | input                        | output                                 | hasWarnings
@@ -72,28 +73,28 @@ describe.each`
       ],
     },
   ),
-);
+)
 
 test('no duplicate deprecation warnings', () => {
   for (const deprecatedResult of [true, { value }]) {
-    const logger = createLogger();
+    const logger = createLogger()
 
     const schemas = [
       TestSchema.create<TestSchema>({ name, deprecated: deprecatedResult }),
-    ];
-    const normalizer = new Normalizer(schemas, { logger });
+    ]
+    const normalizer = new Normalizer(schemas, { logger })
 
-    let lastMessagesLength = -1;
+    let lastMessagesLength = -1
     for (let i = 0; i < 2; i++) {
-      normalizer.normalize({ [name]: value });
-      const messagesLength = logger.getMessages().length;
+      normalizer.normalize({ [name]: value })
+      const messagesLength = logger.getMessages().length
 
       if (i > 0) {
-        expect(messagesLength).toEqual(lastMessagesLength);
-        expect(messagesLength).toBeGreaterThan(0);
+        expect(messagesLength).toEqual(lastMessagesLength)
+        expect(messagesLength).toBeGreaterThan(0)
       }
 
-      lastMessagesLength = messagesLength;
+      lastMessagesLength = messagesLength
     }
   }
-});
+})

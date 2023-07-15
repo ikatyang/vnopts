@@ -1,15 +1,16 @@
-import { eachHandler } from '../../tests/__helpers__/utils';
-import { ArraySchema } from './array';
-import { BooleanSchema } from './boolean';
-import { ChoiceSchema } from './choice';
+import { describe } from 'vitest'
+import { eachHandler } from '../../tests/__helpers__/utils.js'
+import { ArraySchema } from './array.js'
+import { BooleanSchema } from './boolean.js'
+import { ChoiceSchema } from './choice.js'
 
-const name = '<key>';
-const value = '<value>';
-const invalid = '<invalid-value>';
-const deprecated = '<deprecated-value>';
-const transfer = '<transfer-value>';
-const forward = '<forward-value>';
-const redirect = '<redirect-value>';
+const name = '<key>'
+const value = '<value>'
+const invalid = '<invalid-value>'
+const deprecated = '<deprecated-value>'
+const transfer = '<transfer-value>'
+const forward = '<forward-value>'
+const redirect = '<redirect-value>'
 
 describe.each`
   parameters | input                              | output                                    | hasWarnings
@@ -34,7 +35,7 @@ describe.each`
       ],
     }),
   }),
-);
+)
 
 describe.each`
   parameters | input                    | output   | hasWarnings
@@ -44,7 +45,7 @@ describe.each`
   eachHandler<ArraySchema<BooleanSchema>>(ArraySchema, {
     valueSchema: new BooleanSchema({ name }),
   }),
-);
+)
 
 describe.each`
   parameters | input                    | output   | hasWarnings
@@ -57,4 +58,4 @@ describe.each`
       choices: Array.from(new Array(20), (_value, index) => `value${index}`),
     }),
   }),
-);
+)

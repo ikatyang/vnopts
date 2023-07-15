@@ -1,22 +1,23 @@
-import { Logger, normalize, Schema } from '../../src';
+import { expect, test } from 'vitest'
+import { Logger, normalize, Schema } from '../../src/index.js'
 
 interface FakeLogger extends Logger {
-  clearMessages: () => void;
-  getMessages: () => string[];
+  clearMessages: () => void
+  getMessages: () => string[]
 }
 
 export function createLogger(): FakeLogger {
-  const messages: string[] = [];
+  const messages: string[] = []
   return {
     warn: message => messages.push(message),
     clearMessages: () => messages.splice(0, messages.length),
     getMessages: () => messages,
-  };
+  }
 }
 
 export function eachHandler<$Schema extends Schema<any>>(
   SchemaConstructor: {
-    create: (parameters: $Schema['_parametersType']) => $Schema;
+    create: (parameters: $Schema['_parametersType']) => $Schema
   },
   schemaConstructorParameters: $Schema['_parametersType'],
   {
@@ -24,9 +25,9 @@ export function eachHandler<$Schema extends Schema<any>>(
     schemas: predefinedSchemas = [],
     loggerPrintWidth,
   }: {
-    logger?: FakeLogger;
-    schemas?: Array<Schema<any>>;
-    loggerPrintWidth?: number;
+    logger?: FakeLogger
+    schemas?: Array<Schema<any>>
+    loggerPrintWidth?: number
   } = {},
 ) {
   return ({ parameters, input, output, hasWarnings }: any) => {
@@ -34,36 +35,36 @@ export function eachHandler<$Schema extends Schema<any>>(
       // @ts-ignore
       ...schemaConstructorParameters,
       ...parameters,
-    };
-    const opts = { logger, loggerPrintWidth, unknown: parameters.unknown };
+    }
+    const opts = { logger, loggerPrintWidth, unknown: parameters.unknown }
 
     const title = `schema ${JSON.stringify(
       schemaParameters,
-    )} with input ${JSON.stringify(input)}`;
+    )} with input ${JSON.stringify(input)}`
 
     test(title, () => {
-      logger.clearMessages();
+      logger.clearMessages()
 
       const schemas = [
         SchemaConstructor.create(schemaParameters),
         ...predefinedSchemas,
-      ];
+      ]
 
       if (output === Error) {
         expect(() =>
           normalize(input, schemas, opts),
-        ).toThrowErrorMatchingSnapshot();
+        ).toThrowErrorMatchingSnapshot()
       } else {
-        expect(normalize(input, schemas, opts)).toEqual(output);
+        expect(normalize(input, schemas, opts)).toEqual(output)
       }
 
-      const messages = logger.getMessages();
+      const messages = logger.getMessages()
       if (hasWarnings) {
-        expect(messages).not.toHaveLength(0);
-        expect(messages).toMatchSnapshot();
+        expect(messages).not.toHaveLength(0)
+        expect(messages).toMatchSnapshot()
       } else {
-        expect(messages).toHaveLength(0);
+        expect(messages).toHaveLength(0)
       }
-    });
-  };
+    })
+  }
 }

@@ -1,20 +1,20 @@
-import { Descriptor } from '../types';
+import { Descriptor } from '../types.js'
 
 export const apiDescriptor: Descriptor = {
   key: key =>
     /^[$_a-zA-Z][$_a-zA-Z0-9]*$/.test(key) ? key : JSON.stringify(key),
   value(value) {
     if (value === null || typeof value !== 'object') {
-      return JSON.stringify(value);
+      return JSON.stringify(value)
     }
 
     if (Array.isArray(value)) {
       return `[${value
         .map(subValue => apiDescriptor.value(subValue))
-        .join(', ')}]`;
+        .join(', ')}]`
     }
 
-    const keys = Object.keys(value);
+    const keys = Object.keys(value)
     return keys.length === 0
       ? '{}'
       : `{ ${keys
@@ -22,7 +22,7 @@ export const apiDescriptor: Descriptor = {
             key =>
               `${apiDescriptor.key(key)}: ${apiDescriptor.value(value[key])}`,
           )
-          .join(', ')} }`;
+          .join(', ')} }`
   },
   pair: ({ key, value }) => apiDescriptor.value({ [key]: value }),
-};
+}

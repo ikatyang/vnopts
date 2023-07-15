@@ -1,5 +1,5 @@
-import chalk from 'chalk';
-import { DeprecatedHandler } from '../../types';
+import chalk from 'chalk'
+import { DeprecatedHandler } from '../../types.js'
 
 export const commonDeprecatedHandler: DeprecatedHandler = (
   keyOrPair,
@@ -12,7 +12,7 @@ export const commonDeprecatedHandler: DeprecatedHandler = (
         ? descriptor.key(keyOrPair)
         : descriptor.pair(keyOrPair),
     )} is deprecated`,
-  ];
+  ]
 
   if (redirectTo) {
     messages.push(
@@ -21,8 +21,8 @@ export const commonDeprecatedHandler: DeprecatedHandler = (
           ? descriptor.key(redirectTo)
           : descriptor.pair(redirectTo),
       )}`,
-    );
+    )
   }
 
-  return messages.join('; ') + '.';
-};
+  return messages.join('; ') + '.'
+}
