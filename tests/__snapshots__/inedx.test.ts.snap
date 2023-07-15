@@ -1,27 +1,27 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`deprecated 1`] = `
-Object {
+{
   "parser": "flow",
 }
 `;
 
 exports[`deprecated 2`] = `
-Array [
+[
   "useFlowParser is deprecated; we now treat it as { parser: \\"flow\\" }.",
 ]
 `;
 
-exports[`postprocess schema throw error for invalid postprocessed value 1`] = `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`;
+exports[`postprocess > schema > throw error for invalid postprocessed value 1`] = `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`;
 
 exports[`redirect 1`] = `
-Object {
+{
   "parser": "css",
 }
 `;
 
 exports[`redirect 2`] = `
-Array [
+[
   "{ parser: \\"postcss\\" } is deprecated; we now treat it as { parser: \\"css\\" }.",
 ]
 `;

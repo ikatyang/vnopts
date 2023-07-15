@@ -1,11 +1,12 @@
-import * as vnopts from '../src';
-import { createLogger } from './__helpers__/utils';
+import { beforeEach, describe, expect, test } from 'vitest'
+import * as vnopts from '../src/index.js'
+import { createLogger } from './__helpers__/utils.js'
 
-const logger = createLogger();
+const logger = createLogger()
 
 beforeEach(() => {
-  logger.clearMessages();
-});
+  logger.clearMessages()
+})
 
 const schemas = [
   vnopts.createSchema(vnopts.BooleanSchema, {
@@ -32,26 +33,26 @@ const schemas = [
       'scss',
     ],
   }),
-];
+]
 
 test('deprecated', () => {
   expect(
     vnopts.normalize({ useFlowParser: true }, schemas, { logger }),
-  ).toMatchSnapshot();
-  expect(logger.getMessages()).toMatchSnapshot();
-});
+  ).toMatchSnapshot()
+  expect(logger.getMessages()).toMatchSnapshot()
+})
 
 test('redirect', () => {
   expect(
     vnopts.normalize({ parser: 'postcss' }, schemas, { logger }),
-  ).toMatchSnapshot();
-  expect(logger.getMessages()).toMatchSnapshot();
-});
+  ).toMatchSnapshot()
+  expect(logger.getMessages()).toMatchSnapshot()
+})
 
 describe('missing', () => {
-  const name = '<key>';
+  const name = '<key>'
   const missing: vnopts.IdentifyMissing = (key, options) =>
-    options[key] === undefined;
+    options[key] === undefined
 
   test('missing pair will be filtered', () => {
     expect(
@@ -60,18 +61,18 @@ describe('missing', () => {
         [vnopts.createSchema(vnopts.AnySchema, { name, validate: false })],
         { missing },
       ),
-    ).toEqual({});
+    ).toEqual({})
     expect(
       vnopts.normalize(
         { unknown: true },
         [vnopts.createSchema(vnopts.AnySchema, { name })],
         { missing, unknown: () => ({ [name]: undefined }) },
       ),
-    ).toEqual({});
-  });
+    ).toEqual({})
+  })
 
   test('missing pair will be replaced by default pair if present', () => {
-    const defaultValue = 'foo';
+    const defaultValue = 'foo'
     expect(
       vnopts.normalize(
         { [name]: undefined },
@@ -83,9 +84,9 @@ describe('missing', () => {
         ],
         { missing },
       ),
-    ).toEqual({ [name]: defaultValue });
-  });
-});
+    ).toEqual({ [name]: defaultValue })
+  })
+})
 
 test('required', () => {
   expect(() =>
@@ -94,14 +95,14 @@ test('required', () => {
       [vnopts.createSchema(vnopts.AnySchema, { name: '<key>' })],
       { required: () => true },
     ),
-  ).toThrowErrorMatchingSnapshot();
-});
+  ).toThrowErrorMatchingSnapshot()
+})
 
 describe('postprocess', () => {
-  const name = '<key>';
-  const validValue1 = '<valid-value-1>';
-  const validValue2 = '<valid-value-2>';
-  const invalidValue = '<invalid-value>';
+  const name = '<key>'
+  const validValue1 = '<valid-value-1>'
+  const validValue2 = '<valid-value-2>'
+  const invalidValue = '<invalid-value>'
 
   describe('schema', () => {
     test('throw error for invalid postprocessed value', () => {
@@ -113,8 +114,8 @@ describe('postprocess', () => {
             postprocess: () => invalidValue,
           }),
         ]),
-      ).toThrowErrorMatchingSnapshot();
-    });
+      ).toThrowErrorMatchingSnapshot()
+    })
     test('replace with valid postprocessed value', () => {
       expect(
         vnopts.normalize({ [name]: validValue1 }, [
@@ -124,9 +125,9 @@ describe('postprocess', () => {
             postprocess: () => validValue2,
           }),
         ]),
-      ).toEqual({ [name]: validValue2 });
-    });
-  });
+      ).toEqual({ [name]: validValue2 })
+    })
+  })
 
   describe('normalizer', () => {
     test('delete', () => {
@@ -141,8 +142,8 @@ describe('postprocess', () => {
           ],
           { postprocess: () => ({ delete: [name] }) },
         ),
-      ).toEqual({});
-    });
+      ).toEqual({})
+    })
     test('throw invalid override value', () => {
       expect(() =>
         vnopts.normalize(
@@ -157,8 +158,8 @@ describe('postprocess', () => {
         ),
       ).toThrowErrorMatchingInlineSnapshot(
         `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`,
-      );
-    });
+      )
+    })
     test('throw invalid override value from unknownHandler result', () => {
       expect(() =>
         vnopts.normalize(
@@ -176,8 +177,8 @@ describe('postprocess', () => {
         ),
       ).toThrowErrorMatchingInlineSnapshot(
         `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`,
-      );
-    });
+      )
+    })
     test('apply valid override value from unknownHandler result', () => {
       expect(
         vnopts.normalize(
@@ -194,14 +195,14 @@ describe('postprocess', () => {
             unknown: () => ({ [name]: validValue1 }),
           },
         ),
-      ).toEqual({ known: true, [name]: validValue1 });
+      ).toEqual({ known: true, [name]: validValue1 })
       expect(
         vnopts.normalize(
           {},
           [vnopts.createSchema(vnopts.AnySchema, { name: 'known' })],
           { postprocess: () => ({ override: { known: true } }) },
         ),
-      ).toEqual({ known: true });
-    });
-  });
-});
+      ).toEqual({ known: true })
+    })
+  })
+})

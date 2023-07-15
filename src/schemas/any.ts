@@ -1,11 +1,11 @@
-import { Schema, SchemaParameters } from '../schema';
-import { ValidateResult } from '../types';
+import { Schema, SchemaParameters } from '../schema.js'
+import { ValidateResult } from '../types.js'
 
 export class AnySchema extends Schema<any, SchemaParameters<any>> {
   public expected() {
-    return 'anything';
+    return 'anything'
   }
   public validate(): ValidateResult {
-    return true;
+    return true
   }
 }

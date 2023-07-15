@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`(complex expected values) schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"invalid"} 1`] = `
+exports[`(complex expected values) > schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"invalid"} 1`] = `
 "Invalid \\"<key>\\" value. Expected an array of the following values, but received \\"invalid\\".
 - one of the following values:
   - \\"value0\\"
@@ -25,7 +25,7 @@ exports[`(complex expected values) schema {"valueSchema":{"name":"<key>","_choic
   - \\"value9\\""
 `;
 
-exports[`(simple expected values) schema {"valueSchema":{"name":"<key>"}} with input {"<key>":"invalid"} 1`] = `"Invalid \\"<key>\\" value. Expected an array of true or false, but received \\"invalid\\"."`;
+exports[`(simple expected values) > schema {"valueSchema":{"name":"<key>"}} with input {"<key>":"invalid"} 1`] = `"Invalid \\"<key>\\" value. Expected an array of true or false, but received \\"invalid\\"."`;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"<value>"} 1`] = `
 "Invalid \\"<key>\\" value. Expected an array of the following values, but received \\"<value>\\".
@@ -38,7 +38,7 @@ exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key
 `;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<deprecated-value>"]} 1`] = `
-Array [
+[
   "{ \\"<key>\\": [\\"<deprecated-value>\\"] } is deprecated.",
 ]
 `;

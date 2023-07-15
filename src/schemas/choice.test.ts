@@ -1,21 +1,22 @@
-import { eachHandler } from '../../tests/__helpers__/utils';
-import { AnySchema } from './any';
-import { ChoiceSchema } from './choice';
+import { describe } from 'vitest'
+import { eachHandler } from '../../tests/__helpers__/utils.js'
+import { AnySchema } from './any.js'
+import { ChoiceSchema } from './choice.js'
 
-const name = '<key>';
-const value = '<value>';
+const name = '<key>'
+const value = '<value>'
 
-const transferKey = '<transfer-key>';
-const transferValue = '<transfer-value>';
-const transferPair = { key: transferKey, value: transferValue };
-const transfer = { [transferKey]: transferValue };
+const transferKey = '<transfer-key>'
+const transferValue = '<transfer-value>'
+const transferPair = { key: transferKey, value: transferValue }
+const transfer = { [transferKey]: transferValue }
 
-const invalidValue = '<invalid-value>';
-const deprecatedValue = '<deprecated-value>';
-const forwardValue = '<forward-value>';
-const redirectValue = '<redirect-value>';
-const unknownValue = '<unknown-value>';
-const hiddenValue = '<hidden-value>';
+const invalidValue = '<invalid-value>'
+const deprecatedValue = '<deprecated-value>'
+const forwardValue = '<forward-value>'
+const redirectValue = '<redirect-value>'
+const unknownValue = '<unknown-value>'
+const hiddenValue = '<hidden-value>'
 
 describe.each`
   parameters            | input                          | output                                   | hasWarnings
@@ -41,7 +42,7 @@ describe.each`
     },
     { schemas: [new AnySchema({ name: transferKey })] },
   ),
-);
+)
 
 for (const loggerPrintWidth of [-Infinity, Infinity]) {
   describe.each`
@@ -57,5 +58,5 @@ for (const loggerPrintWidth of [-Infinity, Infinity]) {
       },
       { loggerPrintWidth },
     ),
-  );
+  )
 }

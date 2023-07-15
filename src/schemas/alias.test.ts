@@ -1,12 +1,13 @@
-import { eachHandler } from '../../tests/__helpers__/utils';
-import { AliasSchema } from './alias';
-import { ChoiceSchema } from './choice';
+import { describe } from 'vitest'
+import { eachHandler } from '../../tests/__helpers__/utils.js'
+import { AliasSchema } from './alias.js'
+import { ChoiceSchema } from './choice.js'
 
-const name = '<key>';
-const validValue = '<valid-value>';
-const invalidValue = '<invalid-value>';
+const name = '<key>'
+const validValue = '<valid-value>'
+const invalidValue = '<invalid-value>'
 
-const sourceName = '<source-key>';
+const sourceName = '<source-key>'
 
 describe.each`
   parameters | input                       | output                          | hasWarnings
@@ -26,4 +27,4 @@ describe.each`
       ],
     },
   ),
-);
+)

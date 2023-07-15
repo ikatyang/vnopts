@@ -1,8 +1,8 @@
-export * from './descriptors';
-export * from './handlers';
-export * from './schemas';
+export * from './descriptors/index.js'
+export * from './handlers/index.js'
+export * from './schemas/index.js'
 
-export * from './constants';
-export * from './normalize';
-export * from './schema';
-export * from './types';
+export * from './constants.js'
+export * from './normalize.js'
+export * from './schema.js'
+export * from './types.js'
