@@ -8,11 +8,11 @@ exports[`deprecated 1`] = `
 
 exports[`deprecated 2`] = `
 [
-  "useFlowParser is deprecated; we now treat it as { parser: \\"flow\\" }.",
+  "useFlowParser is deprecated; we now treat it as { parser: "flow" }.",
 ]
 `;
 
-exports[`postprocess > schema > throw error for invalid postprocessed value 1`] = `"Invalid \\"<key>\\" value. Expected \\"<valid-value-1>\\", but received \\"<invalid-value>\\"."`;
+exports[`postprocess > schema > throw error for invalid postprocessed value 1`] = `[Error: Invalid "<key>" value. Expected "<valid-value-1>", but received "<invalid-value>".]`;
 
 exports[`redirect 1`] = `
 {
@@ -22,8 +22,8 @@ exports[`redirect 1`] = `
 
 exports[`redirect 2`] = `
 [
-  "{ parser: \\"postcss\\" } is deprecated; we now treat it as { parser: \\"css\\" }.",
+  "{ parser: "postcss" } is deprecated; we now treat it as { parser: "css" }.",
 ]
 `;
 
-exports[`required 1`] = `"Invalid \\"<key>\\" value. Expected anything, but received nothing."`;
+exports[`required 1`] = `[Error: Invalid "<key>" value. Expected anything, but received nothing.]`;

@@ -2,6 +2,6 @@
 
 exports[`apiDescriptor 1`] = `"{}"`;
 
-exports[`apiDescriptor 2`] = `"\\"key\\""`;
+exports[`apiDescriptor 2`] = `""key""`;
 
-exports[`apiDescriptor 3`] = `"{ key: \\"value\\" }"`;
+exports[`apiDescriptor 3`] = `"{ key: "value" }"`;
