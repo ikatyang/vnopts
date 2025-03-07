@@ -20,19 +20,18 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "chalk": "^5.3.0",
-    "leven": "^4.0.0",
-    "tslib": "^2.6.0"
+    "chalk": "^5.4.1",
+    "leven": "^4.0.0"
   },
   "devDependencies": {
-    "@types/node": "18.16.19",
-    "@vitest/coverage-v8": "0.33.0",
+    "@types/node": "22.13.9",
+    "@vitest/coverage-v8": "3.0.8",
     "jest-snapshot-serializer-ansi": "2.1.0",
-    "prettier": "3.0.0",
+    "prettier": "3.5.3",
     "standard-version": "9.5.0",
-    "typescript": "5.1.6",
-    "vite": "4.4.4",
-    "vitest": "0.33.0"
+    "typescript": "5.8.2",
+    "vite": "6.2.1",
+    "vitest": "3.0.8"
   },
   "engines": {
     "node": ">=16"

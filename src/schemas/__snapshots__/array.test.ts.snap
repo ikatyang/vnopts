@@ -1,54 +1,54 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`(complex expected values) > schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"invalid"} 1`] = `
-"Invalid \\"<key>\\" value. Expected an array of the following values, but received \\"invalid\\".
+[Error: Invalid "<key>" value. Expected an array of the following values, but received "invalid".
 - one of the following values:
-  - \\"value0\\"
-  - \\"value1\\"
-  - \\"value10\\"
-  - \\"value11\\"
-  - \\"value12\\"
-  - \\"value13\\"
-  - \\"value14\\"
-  - \\"value15\\"
-  - \\"value16\\"
-  - \\"value17\\"
-  - \\"value18\\"
-  - \\"value19\\"
-  - \\"value2\\"
-  - \\"value3\\"
-  - \\"value4\\"
-  - \\"value5\\"
-  - \\"value6\\"
-  - \\"value7\\"
-  - \\"value8\\"
-  - \\"value9\\""
+  - "value0"
+  - "value1"
+  - "value10"
+  - "value11"
+  - "value12"
+  - "value13"
+  - "value14"
+  - "value15"
+  - "value16"
+  - "value17"
+  - "value18"
+  - "value19"
+  - "value2"
+  - "value3"
+  - "value4"
+  - "value5"
+  - "value6"
+  - "value7"
+  - "value8"
+  - "value9"]
 `;
 
-exports[`(simple expected values) > schema {"valueSchema":{"name":"<key>"}} with input {"<key>":"invalid"} 1`] = `"Invalid \\"<key>\\" value. Expected an array of true or false, but received \\"invalid\\"."`;
+exports[`(simple expected values) > schema {"valueSchema":{"name":"<key>"}} with input {"<key>":"invalid"} 1`] = `[Error: Invalid "<key>" value. Expected an array of true or false, but received "invalid".]`;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"<value>"} 1`] = `
-"Invalid \\"<key>\\" value. Expected an array of the following values, but received \\"<value>\\".
+[Error: Invalid "<key>" value. Expected an array of the following values, but received "<value>".
 - one of the following values:
-  - \\"<deprecated-value>\\"
-  - \\"<forward-value>\\"
-  - \\"<redirect-value>\\"
-  - \\"<transfer-value>\\"
-  - \\"<value>\\""
+  - "<deprecated-value>"
+  - "<forward-value>"
+  - "<redirect-value>"
+  - "<transfer-value>"
+  - "<value>"]
 `;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<deprecated-value>"]} 1`] = `
 [
-  "{ \\"<key>\\": [\\"<deprecated-value>\\"] } is deprecated.",
+  "{ "<key>": ["<deprecated-value>"] } is deprecated.",
 ]
 `;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<invalid-value>"]} 1`] = `
-"Invalid \\"<key>\\" value. Expected an array of the following values, but received [\\"<invalid-value>\\"].
+[Error: Invalid "<key>" value. Expected an array of the following values, but received ["<invalid-value>"].
 - one of the following values:
-  - \\"<deprecated-value>\\"
-  - \\"<forward-value>\\"
-  - \\"<redirect-value>\\"
-  - \\"<transfer-value>\\"
-  - \\"<value>\\""
+  - "<deprecated-value>"
+  - "<forward-value>"
+  - "<redirect-value>"
+  - "<transfer-value>"
+  - "<value>"]
 `;
