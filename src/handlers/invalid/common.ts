@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import picocolors from 'picocolors'
 import { VALUE_NOT_EXIST } from '../../constants.js'
 import {
   Descriptor,
@@ -43,12 +43,12 @@ function getDescription(
   descriptor: Descriptor,
 ) {
   return [
-    `Invalid ${chalk.red(descriptor.key(key))} value.`,
-    `Expected ${chalk.blue(expected)},`,
+    `Invalid ${picocolors.red(descriptor.key(key))} value.`,
+    `Expected ${picocolors.blue(expected)},`,
     `but received ${
       value === VALUE_NOT_EXIST
-        ? chalk.gray('nothing')
-        : chalk.red(descriptor.value(value))
+        ? picocolors.gray('nothing')
+        : picocolors.red(descriptor.value(value))
     }.`,
   ].join(' ')
 }
@@ -60,12 +60,12 @@ function getListDescription(
   const descriptions: string[] = []
 
   if (text) {
-    descriptions.push(`- ${chalk.blue(text)}`)
+    descriptions.push(`- ${picocolors.blue(text)}`)
   }
 
   if (list) {
     descriptions.push(
-      [`- ${chalk.blue(list.title)}:`]
+      [`- ${picocolors.blue(list.title)}:`]
         .concat(
           list.values.map(valueDescription =>
             getListDescription(

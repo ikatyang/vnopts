@@ -1,40 +1,40 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`(complex expected values) > schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"invalid"} 1`] = `
-[Error: Invalid "<key>" value. Expected an array of the following values, but received "invalid".
-- one of the following values:
-  - "value0"
-  - "value1"
-  - "value10"
-  - "value11"
-  - "value12"
-  - "value13"
-  - "value14"
-  - "value15"
-  - "value16"
-  - "value17"
-  - "value18"
-  - "value19"
-  - "value2"
-  - "value3"
-  - "value4"
-  - "value5"
-  - "value6"
-  - "value7"
-  - "value8"
-  - "value9"]
+[Error: Invalid [31m"<key>"[39m value. Expected [34man array of the following values[39m, but received [31m"invalid"[39m.
+- [34mone of the following values[39m:
+  - [34m"value0"[39m
+  - [34m"value1"[39m
+  - [34m"value10"[39m
+  - [34m"value11"[39m
+  - [34m"value12"[39m
+  - [34m"value13"[39m
+  - [34m"value14"[39m
+  - [34m"value15"[39m
+  - [34m"value16"[39m
+  - [34m"value17"[39m
+  - [34m"value18"[39m
+  - [34m"value19"[39m
+  - [34m"value2"[39m
+  - [34m"value3"[39m
+  - [34m"value4"[39m
+  - [34m"value5"[39m
+  - [34m"value6"[39m
+  - [34m"value7"[39m
+  - [34m"value8"[39m
+  - [34m"value9"[39m]
 `;
 
-exports[`(simple expected values) > schema {"valueSchema":{"name":"<key>"}} with input {"<key>":"invalid"} 1`] = `[Error: Invalid "<key>" value. Expected an array of true or false, but received "invalid".]`;
+exports[`(simple expected values) > schema {"valueSchema":{"name":"<key>"}} with input {"<key>":"invalid"} 1`] = `[Error: Invalid [31m"<key>"[39m value. Expected [34man array of true or false[39m, but received [31m"invalid"[39m.]`;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":"<value>"} 1`] = `
-[Error: Invalid "<key>" value. Expected an array of the following values, but received "<value>".
-- one of the following values:
-  - "<deprecated-value>"
-  - "<forward-value>"
-  - "<redirect-value>"
-  - "<transfer-value>"
-  - "<value>"]
+[Error: Invalid [31m"<key>"[39m value. Expected [34man array of the following values[39m, but received [31m"<value>"[39m.
+- [34mone of the following values[39m:
+  - [34m"<deprecated-value>"[39m
+  - [34m"<forward-value>"[39m
+  - [34m"<redirect-value>"[39m
+  - [34m"<transfer-value>"[39m
+  - [34m"<value>"[39m]
 `;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<deprecated-value>"]} 1`] = `
@@ -44,11 +44,11 @@ exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key
 `;
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<invalid-value>"]} 1`] = `
-[Error: Invalid "<key>" value. Expected an array of the following values, but received ["<invalid-value>"].
-- one of the following values:
-  - "<deprecated-value>"
-  - "<forward-value>"
-  - "<redirect-value>"
-  - "<transfer-value>"
-  - "<value>"]
+[Error: Invalid [31m"<key>"[39m value. Expected [34man array of the following values[39m, but received [31m["<invalid-value>"][39m.
+- [34mone of the following values[39m:
+  - [34m"<deprecated-value>"[39m
+  - [34m"<forward-value>"[39m
+  - [34m"<redirect-value>"[39m
+  - [34m"<transfer-value>"[39m
+  - [34m"<value>"[39m]
 `;

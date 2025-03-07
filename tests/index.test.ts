@@ -157,7 +157,7 @@ describe('postprocess', () => {
           { postprocess: () => ({ override: { [name]: invalidValue } }) },
         ),
       ).toThrowErrorMatchingInlineSnapshot(
-        `[Error: Invalid "<key>" value. Expected "<valid-value-1>", but received "<invalid-value>".]`,
+        `[Error: Invalid [31m"<key>"[39m value. Expected [34m"<valid-value-1>"[39m, but received [31m"<invalid-value>"[39m.]`,
       )
     })
     test('throw invalid override value from unknownHandler result', () => {
@@ -176,7 +176,7 @@ describe('postprocess', () => {
           },
         ),
       ).toThrowErrorMatchingInlineSnapshot(
-        `[Error: Invalid "<key>" value. Expected "<valid-value-1>", but received "<invalid-value>".]`,
+        `[Error: Invalid [31m"<key>"[39m value. Expected [34m"<valid-value-1>"[39m, but received [31m"<invalid-value>"[39m.]`,
       )
     })
     test('apply valid override value from unknownHandler result', () => {

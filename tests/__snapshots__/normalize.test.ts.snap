@@ -36,9 +36,9 @@ exports[`schema {"name":"<key>","deprecated":true} with input {"<key>":"<value>"
 ]
 `;
 
-exports[`schema {"name":"<key>","validate":{"value":"<invalid-value>"}} with input {"<key>":"<value>"} 1`] = `[Error: Invalid "<key>" value. Expected <expected>, but received "<invalid-value>".]`;
+exports[`schema {"name":"<key>","validate":{"value":"<invalid-value>"}} with input {"<key>":"<value>"} 1`] = `[Error: Invalid [31m"<key>"[39m value. Expected [34m<expected>[39m, but received [31m"<invalid-value>"[39m.]`;
 
-exports[`schema {"name":"<key>","validate":false} with input {"<key>":"<value>"} 1`] = `[Error: Invalid "<key>" value. Expected <expected>, but received "<value>".]`;
+exports[`schema {"name":"<key>","validate":false} with input {"<key>":"<value>"} 1`] = `[Error: Invalid [31m"<key>"[39m value. Expected [34m<expected>[39m, but received [31m"<value>"[39m.]`;
 
 exports[`schema {"name":"<key>"} with input {"<unknown-key>":"<unknown-value>"} 1`] = `
 [
