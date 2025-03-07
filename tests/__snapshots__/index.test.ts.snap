@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`deprecated 1`] = `
+{
+  "parser": "flow",
+}
+`;
+
+exports[`deprecated 2`] = `
+[
+  "useFlowParser is deprecated; we now treat it as { parser: "flow" }.",
+]
+`;
+
+exports[`postprocess > schema > throw error for invalid postprocessed value 1`] = `[Error: Invalid [31m"<key>"[39m value. Expected [34m"<valid-value-1>"[39m, but received [31m"<invalid-value>"[39m.]`;
+
+exports[`redirect 1`] = `
+{
+  "parser": "css",
+}
+`;
+
+exports[`redirect 2`] = `
+[
+  "{ parser: "postcss" } is deprecated; we now treat it as { parser: "css" }.",
+]
+`;
+
+exports[`required 1`] = `[Error: Invalid [31m"<key>"[39m value. Expected [34manything[39m, but received [90mnothing[39m.]`;

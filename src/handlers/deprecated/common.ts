@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import picocolors from 'picocolors'
 import { DeprecatedHandler } from '../../types.js'
 
 export const commonDeprecatedHandler: DeprecatedHandler = (
@@ -7,7 +7,7 @@ export const commonDeprecatedHandler: DeprecatedHandler = (
   { descriptor },
 ) => {
   const messages = [
-    `${chalk.yellow(
+    `${picocolors.yellow(
       typeof keyOrPair === 'string'
         ? descriptor.key(keyOrPair)
         : descriptor.pair(keyOrPair),
@@ -16,7 +16,7 @@ export const commonDeprecatedHandler: DeprecatedHandler = (
 
   if (redirectTo) {
     messages.push(
-      `we now treat it as ${chalk.blue(
+      `we now treat it as ${picocolors.blue(
         typeof redirectTo === 'string'
           ? descriptor.key(redirectTo)
           : descriptor.pair(redirectTo),
