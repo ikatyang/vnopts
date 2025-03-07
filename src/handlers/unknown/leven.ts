@@ -16,7 +16,9 @@ export const levenUnknownHandler: UnknownHandler = (
     .find(knownKey => leven(key, knownKey) < 3)
 
   if (suggestion) {
-    messages.push(`Did you mean ${picocolors.blue(descriptor.key(suggestion))}?`)
+    messages.push(
+      `Did you mean ${picocolors.blue(descriptor.key(suggestion))}?`,
+    )
   }
 
   logger.warn(messages.join(' '))
