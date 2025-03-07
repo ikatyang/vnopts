@@ -201,14 +201,14 @@ export function normalizeDeprecatedResult<$Value>(
   return result === false
     ? false
     : result === true
-    ? doNotNormalizeTrue
-      ? true
-      : [{ value }]
-    : 'value' in result
-    ? [result]
-    : result.length === 0
-    ? false
-    : (result as NotEmptyArray<{ value: $Value }>)
+      ? doNotNormalizeTrue
+        ? true
+        : [{ value }]
+      : 'value' in result
+        ? [result]
+        : result.length === 0
+          ? false
+          : (result as NotEmptyArray<{ value: $Value }>)
 }
 
 export function normalizeTransferResult<$Value>(
@@ -218,8 +218,8 @@ export function normalizeTransferResult<$Value>(
   return typeof result === 'string' || 'key' in result
     ? { from: value, to: result }
     : 'from' in result
-    ? { from: result.from!, to: result.to }
-    : { from: value, to: result.to }
+      ? { from: result.from!, to: result.to }
+      : { from: value, to: result.to }
 }
 
 export function normalizeForwardResult<$Value>(
@@ -229,10 +229,10 @@ export function normalizeForwardResult<$Value>(
   return result === undefined
     ? []
     : Array.isArray(result)
-    ? result.map(transferResult =>
-        normalizeTransferResult(transferResult, value),
-      )
-    : [normalizeTransferResult(result, value)]
+      ? result.map(transferResult =>
+          normalizeTransferResult(transferResult, value),
+        )
+      : [normalizeTransferResult(result, value)]
 }
 
 export function normalizeRedirectResult<$Value>(
@@ -248,8 +248,8 @@ export function normalizeRedirectResult<$Value>(
   return redirect.length === 0
     ? { remain: value, redirect }
     : typeof result === 'object' && 'remain' in result
-    ? { remain: result.remain, redirect }
-    : { redirect }
+      ? { remain: result.remain, redirect }
+      : { redirect }
 }
 
 export function assert(isValid: boolean, message: string) {
