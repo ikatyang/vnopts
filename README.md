@@ -1,11 +1,11 @@
 # vnopts
 
 [![npm](https://img.shields.io/npm/v/vnopts.svg)](https://www.npmjs.com/package/vnopts)
-[![build](https://img.shields.io/github/actions/workflow/status/ikatyang/vnopts/test.yml)](https://github.com/ikatyang/vnopts/actions?query=branch%3Amaster)
+[![build](https://img.shields.io/github/actions/workflow/status/ikatyang/vnopts/test.yml)](https://github.com/ikatyang/vnopts/actions?query=branch%3Amain)
 
 validate and normalize options
 
-[Changelog](https://github.com/ikatyang/vnopts/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/ikatyang/vnopts/blob/main/CHANGELOG.md)
 
 ## Install
 
@@ -96,7 +96,7 @@ interface Logger {
 
 #### Descriptor
 
-Defaults to [`apiDescriptor`](https://github.com/ikatyang/vnopts/blob/master/src/descriptors/api.ts).
+Defaults to [`apiDescriptor`](https://github.com/ikatyang/vnopts/blob/main/src/descriptors/api.ts).
 
 ```ts
 interface Descriptor {
@@ -108,7 +108,7 @@ interface Descriptor {
 
 #### UnknownHandler
 
-Defaults to [`levenUnknownHandler`](https://github.com/ikatyang/vnopts/blob/master/src/handlers/unknown/leven.ts).
+Defaults to [`levenUnknownHandler`](https://github.com/ikatyang/vnopts/blob/main/src/handlers/unknown/leven.ts).
 
 ```ts
 type UnknownHandler = (key: string, value: any, utils: Utils) => void | object
@@ -118,7 +118,7 @@ The returned object will be merged into the output object (and validate its valu
 
 #### InvalidHandler
 
-Defaults to [`commonInvalidHandler`](https://github.com/ikatyang/vnopts/blob/master/src/handlers/invalid/common.ts).
+Defaults to [`commonInvalidHandler`](https://github.com/ikatyang/vnopts/blob/main/src/handlers/invalid/common.ts).
 
 ```ts
 type InvalidHandler = (
@@ -132,7 +132,7 @@ Returns an error message or the error itself.
 
 #### DeprecatedHandler
 
-Defaults to [`commonDeprecatedHandler`](https://github.com/ikatyang/vnopts/blob/master/src/handlers/deprecated/common.ts).
+Defaults to [`commonDeprecatedHandler`](https://github.com/ikatyang/vnopts/blob/main/src/handlers/deprecated/common.ts).
 
 ```ts
 type DeprecatedHandler = (

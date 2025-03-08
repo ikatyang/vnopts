@@ -4,8 +4,8 @@
   "version": "2.0.1",
   "description": "validate and normalize options",
   "exports": "./lib/index.js",
-  "repository": "https://github.com/ikatyang/vnopts",
-  "homepage": "https://github.com/ikatyang/vnopts#readme",
+  "repository": "https://github.com/ikatyang-collab/vnopts",
+  "homepage": "https://github.com/ikatyang-collab/vnopts#readme",
   "author": {
     "name": "Ika",
     "email": "ikatyang@gmail.com",
