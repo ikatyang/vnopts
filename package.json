@@ -24,9 +24,9 @@
     "picocolors": "^1.1.1"
   },
   "devDependencies": {
-    "@types/node": "22.13.9",
+    "@types/node": "22.13.10",
     "@vitest/coverage-v8": "3.0.8",
-    "jest-snapshot-serializer-ansi": "2.1.0",
+    "jest-snapshot-serializer-ansi": "2.1.2",
     "prettier": "3.5.3",
     "standard-version": "9.5.0",
     "typescript": "5.8.2",
@@ -40,5 +40,10 @@
     "/lib/**/*",
     "/CHANGELOG.md"
   ],
-  "packageManager": "pnpm@8.6.6"
+  "packageManager": "pnpm@10.6.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
 }
