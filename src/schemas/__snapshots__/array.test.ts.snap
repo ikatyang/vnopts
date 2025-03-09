@@ -39,7 +39,7 @@ exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key
 
 exports[`schema {"valueSchema":{"name":"<key>","_choices":{}}} with input {"<key>":["<value>","<deprecated-value>"]} 1`] = `
 [
-  { "<key>": ["<deprecated-value>"] } is deprecated.,
+  "{ "<key>": ["<deprecated-value>"] } is deprecated.",
 ]
 `;
 
