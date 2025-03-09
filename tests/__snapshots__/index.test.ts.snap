@@ -8,7 +8,7 @@ exports[`deprecated 1`] = `
 
 exports[`deprecated 2`] = `
 [
-  useFlowParser is deprecated; we now treat it as { parser: "flow" }.,
+  "useFlowParser is deprecated; we now treat it as { parser: "flow" }.",
 ]
 `;
 
@@ -22,7 +22,7 @@ exports[`redirect 1`] = `
 
 exports[`redirect 2`] = `
 [
-  { parser: "postcss" } is deprecated; we now treat it as { parser: "css" }.,
+  "{ parser: "postcss" } is deprecated; we now treat it as { parser: "css" }.",
 ]
 `;
 
