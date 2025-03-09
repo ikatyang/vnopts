@@ -1,26 +1,26 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`(expected values printWidth=-Infinity) > schema {"name":"<key>","choices":["value0","value1","value2","value3","value4"]} with input {"<key>":"invalid"} 1`] = `
-[Error: Invalid [31m"<key>"[39m value. Expected [34mone of the following values[39m, but received [31m"invalid"[39m.
-- [34m"value0"[39m
-- [34m"value1"[39m
-- [34m"value2"[39m
-- [34m"value3"[39m
-- [34m"value4"[39m]
+[Error: Invalid "<key>" value. Expected one of the following values, but received "invalid".
+- "value0"
+- "value1"
+- "value2"
+- "value3"
+- "value4"]
 `;
 
-exports[`(expected values printWidth=Infinity) > schema {"name":"<key>","choices":["value0","value1","value2","value3","value4"]} with input {"<key>":"invalid"} 1`] = `[Error: Invalid [31m"<key>"[39m value. Expected [34m"value0", "value1", "value2", "value3" or "value4"[39m, but received [31m"invalid"[39m.]`;
+exports[`(expected values printWidth=Infinity) > schema {"name":"<key>","choices":["value0","value1","value2","value3","value4"]} with input {"<key>":"invalid"} 1`] = `[Error: Invalid "<key>" value. Expected "value0", "value1", "value2", "value3" or "value4", but received "invalid".]`;
 
 exports[`schema {"name":"<key>","choices":["<value>",{"value":"<deprecated-value>","deprecated":true},{"value":"<forward-value>","forward":{"key":"<transfer-key>","value":"<transfer-value>"}},{"value":"<redirect-value>","redirect":{"key":"<transfer-key>","value":"<transfer-value>"}},{"value":"<hidden-value>","hidden":true}]} with input {"<key>":"<deprecated-value>"} 1`] = `
 [
-  "{ "<key>": "<deprecated-value>" } is deprecated.",
+  { "<key>": "<deprecated-value>" } is deprecated.,
 ]
 `;
 
 exports[`schema {"name":"<key>","choices":["<value>",{"value":"<deprecated-value>","deprecated":true},{"value":"<forward-value>","forward":{"key":"<transfer-key>","value":"<transfer-value>"}},{"value":"<redirect-value>","redirect":{"key":"<transfer-key>","value":"<transfer-value>"}},{"value":"<hidden-value>","hidden":true}]} with input {"<key>":"<invalid-value>"} 1`] = `
-[Error: Invalid [31m"<key>"[39m value. Expected [34mone of the following values[39m, but received [31m"<invalid-value>"[39m.
-- [34m"<deprecated-value>"[39m
-- [34m"<forward-value>"[39m
-- [34m"<redirect-value>"[39m
-- [34m"<value>"[39m]
+[Error: Invalid "<key>" value. Expected one of the following values, but received "<invalid-value>".
+- "<deprecated-value>"
+- "<forward-value>"
+- "<redirect-value>"
+- "<value>"]
 `;
